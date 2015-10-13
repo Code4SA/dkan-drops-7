@@ -1,0 +1,51 @@
+SSH
+dkan / Dk@n_0p3nDATa1Z_F0rThE!G0od
+
+MARIADB
+root / dkan_1nst@nc3_passw0rd
+
+DKAN Site
+dadmin / 0p3n_DATa_1Z_GO0d_4_HaiR_GR@WTH
+
+Font -> Pg 39 Open Sans Regular
+
+CartoDB Site
+saopendataportal / C@TA_Db_l0gin_STUFf_AnD_FLUFfy
+
+COLORS
+92cc68 - Main header
+007237 - Link bar selected
+abf07a - Link bar non-selected
+
+-- INSTALL SCRIPT --
+apt-get install apache2
+apt-get install mariadb-server
+apt-get install php5-mysql
+apt-get install php5
+sudo apt-get install sysv-rc-conf
+apt-get install php5-gd
+
+cd /usr/local/src
+git clone https://github.com/T-rav/dkan-drops-7 dkan
+cp -r dkan/* /var/www/html/
+cd /var/www/html
+chmod 777 sites
+cd default
+cp default.settings.php settings.php
+chmod 777 settings.php
+
+-- MySQL Setup --
+mysql -p
+CREATE DATABASE dkan;
+CREATE USER 'dkanDB'@'localhost' IDENTIFIED BY 'THis_A_verY_T0ugh_P@SSworD_1500';
+GRANT ALL PRIVILEGES ON dkan.* TO 'dkanDB'@'localhost' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+
+goto blah.com/install.php to start process
+
+perform any required module upgrades ( Avoid DKAN )
+
+-- Install CartoDB -- ????????????
+cd /usr/local/src
+git clone https://github.com/NuCivic/cartodbclient-php.git
+Follow instructions @ https://github.com/Nucivic/cartodbclient-php
