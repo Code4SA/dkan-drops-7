@@ -1,0 +1,25 @@
+Note : All amended took place from the default of Forest
+Note : When directly editing colorizer.css you will need to save from the Colorizor UI to force a CSS rebuild
+
+Header Color : #72D26D
+Footer Color : #E5D794
+Default Link : #0A9900
+New Link     : #274E13
+
+/var/www/html/profiles/dkan/themes/contrib/nuboot_radix/colorizer/colorizer.css
+
+-- FIND hero.jpg --
+grep -R . -e "hero.jpg"
+./profiles/dkan/themes/contrib/nuboot_radix/nuboot_radix.info:settings[hero_path] = 'profiles/dkan/themes/contrib/nuboot_radix/assets/images/hero.jpg'
+./profiles/dkan/themes/contrib/nuboot_radix/panels/layouts/full_width/panels-full-width.tpl.php:    $uri = 'profiles/dkan/themes/contrib/nuboot_radix/assets/images/hero.jpg';
+
+grep -R . -e "background-image:url(http://opendataportal.cloudapp.net/profiles/dkan/themes/contrib/nuboot_radix/assets/images/hero.jpg);background-color:transparent"
+
+-- WHERE THE IMAGE GETS INJECTED --
+/profiles/dkan/themes/contrib/nuboot_radix/panels/layouts/full_width/panels-full-width.tpl.php
+
+grep -R /var/www/html -e "Explore datasets by theme"
+
+-- FOOTER MODS --
+/var/www/html/profiles/dkan/themes/contrib/nuboot_radix/templates/page/page.tpl.php:<footer id="footer" class="footer" role="footer">
+/var/www/html/profiles/dkan/themes/contrib/nuboot_radix/templates/page/page--front.tpl.php:<footer id="footer" class="footer" role="footer">
