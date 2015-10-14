@@ -10,19 +10,26 @@ New Link     : #274E13
 
 -- FIND hero.jpg --
 grep -R . -e "hero.jpg"
-./profiles/dkan/themes/contrib/nuboot_radix/nuboot_radix.info:settings[hero_path] = 'profiles/dkan/themes/contrib/nuboot_radix/assets/images/hero.jpg'
-./profiles/dkan/themes/contrib/nuboot_radix/panels/layouts/full_width/panels-full-width.tpl.php:    $uri = 'profiles/dkan/themes/contrib/nuboot_radix/assets/images/hero.jpg';
-
-grep -R . -e "background-image:url(http://opendataportal.cloudapp.net/profiles/dkan/themes/contrib/nuboot_radix/assets/images/hero.jpg);background-color:transparent"
-
--- WHERE THE IMAGE GETS INJECTED --
-/profiles/dkan/themes/contrib/nuboot_radix/panels/layouts/full_width/panels-full-width.tpl.php
-
 grep -R /var/www/html -e "panel-middle panel-row"
 
+-- WHERE THE IMAGE GETS INJECTED --
+var/www/html/profiles/dkan/themes/contrib/nuboot_radix/panels/layouts/full_width/panels-full-width.tpl.php
+
 -- FOOTER MODS --
-/var/www/html/profiles/dkan/themes/contrib/nuboot_radix/templates/page/page.tpl.php:<footer id="footer" class="footer" role="footer">
-/var/www/html/profiles/dkan/themes/contrib/nuboot_radix/templates/page/page--front.tpl.php:<footer id="footer" class="footer" role="footer">
+/var/www/html/profiles/dkan/themes/contrib/nuboot_radix/templates/page/page.tpl.php
+/var/www/html/profiles/dkan/themes/contrib/nuboot_radix/templates/page/page--front.tpl.php
 
 -- INNER FRONT PAGE PANEL --
 /var/www/html/profiles/dkan/themes/contrib/nuboot_radix/panels/layouts/full_width/panels-full-width.tpl.php
+
+-- EDIT LINKS --
+/var/www/html/profiles/dkan/modules/dkan/dkan_sitewide/modules/dkan_sitewide_menu/dkan_sitewide_menu.features.menu_links.inc
+
+-- ADD FIELDS TO VIEW --
+http://docs.getdkan.com/dkan-documentation/dkan-developers/adding-fields-dkan
+
+-- ADD hero to all pages --
+ $uri = 'profiles/dkan/themes/contrib/nuboot_radix/assets/images/hero.jpg';
+  <div class="panel-top panel-row" style="background-image:url(http://opendataportal.cloudapp.net/profiles/dkan/themes/contrib/nuboot_radix/assets/images/hero.jpg); >
+  </div>
+
