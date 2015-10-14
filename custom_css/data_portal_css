@@ -18,8 +18,11 @@ grep -R . -e "background-image:url(http://opendataportal.cloudapp.net/profiles/d
 -- WHERE THE IMAGE GETS INJECTED --
 /profiles/dkan/themes/contrib/nuboot_radix/panels/layouts/full_width/panels-full-width.tpl.php
 
-grep -R /var/www/html -e "Explore datasets by theme"
+grep -R /var/www/html -e "panel-middle panel-row"
 
 -- FOOTER MODS --
 /var/www/html/profiles/dkan/themes/contrib/nuboot_radix/templates/page/page.tpl.php:<footer id="footer" class="footer" role="footer">
 /var/www/html/profiles/dkan/themes/contrib/nuboot_radix/templates/page/page--front.tpl.php:<footer id="footer" class="footer" role="footer">
+
+-- INNER FRONT PAGE PANEL --
+/var/www/html/profiles/dkan/themes/contrib/nuboot_radix/panels/layouts/full_width/panels-full-width.tpl.php
