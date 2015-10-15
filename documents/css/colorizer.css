@@ -283,4 +283,7 @@ ul.resource-list li .heading:hover {
 .borderImage{
   height:150px;
 }
-
+.headerTranslate{
+  display:block;
+  float:right;
+}

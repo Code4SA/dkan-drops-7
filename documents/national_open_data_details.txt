@@ -50,17 +50,16 @@ cd /usr/local/src
 git clone https://github.com/NuCivic/cartodbclient-php.git
 Follow instructions @ https://github.com/Nucivic/cartodbclient-php
 
+-- USER ACCOUNTS --
+nadia@code4sa.org / STUFFof0penDATA!1_2
+adi@code4sa.org / 0penDaTA1sGoo0dStuffz!!
+jennifer@code4sa.org / DATaThat1s0pen1zB3st!
+richard@opendata.durban / 0penDaTA1sGoo0dSTUFF!
+greg@code4sa.org / DATA4th3Pe0plzIzB3st;
+damian@code4sa.org / Br1ngTheDaTABr1ngP3ace.!
+daniela@code4sa.org / WHENDat@1ZFr3eG0odThingsGo%!
+julia@code4sa.org / BR1NGD@taOFFr3eInNATUrez#
+fritz@code4sa.org / LIB3R@TEY0URDat@!L1VEFrEE
+rayjoe@code4sa.org / DAT@IzB3StUSedWH3nITis0p#n
+ZaidA@dpsa.gov.za / G0v3rment#ENABling0p3nDATaz!
 
-
--- RESTORE --
-Welcome to the South African Government National Open Data Portal. 
-<img src="http://opendataportal.cloudapp.net/profiles/dkan/themes/contrib/nuboot_radix/assets/images/twitter_icon.png" class="socialIcon" ></img>
-<img src="http://opendataportal.cloudapp.net/profiles/dkan/themes/contrib/nuboot_radix/assets/images/facebook_icon.png" class="socialIcon" ></img>
-
-<p class="hrule"></p>
-
-
-
-<p class="sectionHeading">Explore datasets by theme</p>
-<p class="label label-default">10 THEMES</p>
-<p class="btn btn-primary datasetCountLabel">See all X datasets</p>

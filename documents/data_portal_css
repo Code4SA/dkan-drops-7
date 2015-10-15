@@ -10,7 +10,7 @@ New Link     : #274E13
 
 -- FIND hero.jpg --
 grep -R . -e "hero.jpg"
-grep -R /var/www/html -e "panel-middle panel-row"
+grep -R /var/www/html -e "render($page\['help"
 
 -- WHERE THE IMAGE GETS INJECTED --
 /var/www/html/profiles/dkan/themes/contrib/nuboot_radix/panels/layouts/full_width/panels-full-width.tpl.php
@@ -32,4 +32,15 @@ http://docs.getdkan.com/dkan-documentation/dkan-developers/adding-fields-dkan
  $uri = 'profiles/dkan/themes/contrib/nuboot_radix/assets/images/hero.jpg';
   <div class="panel-top panel-row" style="background-image:url(http://opendataportal.cloudapp.net/profiles/dkan/themes/contrib/nuboot_radix/assets/images/hero.jpg); >
   </div>
+
+-- GTranslate --
+/var/www/html/sites/all/modules/gtranslate/gtranslate.module
+/var/www/html/sites/all/modules/gtranslate/gtranslate.module
+
+-- TRANSLATION SCRIPT --
+<div id="google_translate_element"></div><script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'af,zu', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+}
+</script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
