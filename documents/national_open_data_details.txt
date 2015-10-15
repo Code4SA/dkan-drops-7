@@ -49,3 +49,18 @@ perform any required module upgrades ( Avoid DKAN )
 cd /usr/local/src
 git clone https://github.com/NuCivic/cartodbclient-php.git
 Follow instructions @ https://github.com/Nucivic/cartodbclient-php
+
+
+
+-- RESTORE --
+Welcome to the South African Government National Open Data Portal. 
+<img src="http://opendataportal.cloudapp.net/profiles/dkan/themes/contrib/nuboot_radix/assets/images/twitter_icon.png" class="socialIcon" ></img>
+<img src="http://opendataportal.cloudapp.net/profiles/dkan/themes/contrib/nuboot_radix/assets/images/facebook_icon.png" class="socialIcon" ></img>
+
+<p class="hrule"></p>
+
+
+
+<p class="sectionHeading">Explore datasets by theme</p>
+<p class="label label-default">10 THEMES</p>
+<p class="btn btn-primary datasetCountLabel">See all X datasets</p>

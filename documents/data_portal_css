@@ -13,7 +13,7 @@ grep -R . -e "hero.jpg"
 grep -R /var/www/html -e "panel-middle panel-row"
 
 -- WHERE THE IMAGE GETS INJECTED --
-var/www/html/profiles/dkan/themes/contrib/nuboot_radix/panels/layouts/full_width/panels-full-width.tpl.php
+/var/www/html/profiles/dkan/themes/contrib/nuboot_radix/panels/layouts/full_width/panels-full-width.tpl.php
 
 -- FOOTER MODS --
 /var/www/html/profiles/dkan/themes/contrib/nuboot_radix/templates/page/page.tpl.php

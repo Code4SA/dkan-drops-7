@@ -30,10 +30,6 @@ h1,h2,h3,h4 {
 }
 
 .pane-dkan-sitewide-demo-front-dkan-demo-front .pane-content,
-#featured .tint,
-.panel-top .tint {
-  background-color: @top_rgb;
-}
 
 .form-actions {
   background-color: @bg;
@@ -192,6 +188,7 @@ div.autocomplete-deluxe-multiple,
 
 .panel-full-width .panel-top {
   background:@bottom;
+  height:150px;
 }
 .radix-layouts-sidebar .pane-block .pane-content,
 .radix-layouts-content .pane-content,
@@ -239,3 +236,51 @@ ul.resource-list li .heading:hover {
 .footer a {
   color: @sidebarborders;
 }
+.hrule{
+  border-bottom: 1px solid #72D26D;
+  margin-top:20px;
+}
+.socialIcon{
+  float:right;
+  display:block;
+  margin: 0 0 20px 10px;
+}
+.footerDisclaimer{
+  font-size:12px;
+  margin-bottom: 5px;
+}
+.footerTagline{
+  font-size:20px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+.footerSupport{
+  font-size: 12px;
+  color:#555;
+}
+.footerImage{
+  margin-top:10px;
+  margin-right:20px;
+}
+.footerNotice{
+  font-size:10px;
+  float:right;
+  display: block;
+  margin-right:45%;
+  margin-top:-10px;
+}
+.sectionHeading{
+  font-size:20px;
+  font-weight:bold;
+  display: inline-block;
+}
+.datasetCountLabel{
+  display: block;
+  float: right;
+  margin: 0 0 20px 10px;
+  font-size:12px;
+}
+.borderImage{
+  height:150px;
+}
+
