@@ -10,7 +10,7 @@ New Link     : #274E13
 
 -- FIND hero.jpg --
 grep -R . -e "hero.jpg"
-grep -R /var/www/html -e "render($page\['help"
+grep -R /var/www/html -e "view-header"
 
 -- WHERE THE IMAGE GETS INJECTED --
 /var/www/html/profiles/dkan/themes/contrib/nuboot_radix/panels/layouts/full_width/panels-full-width.tpl.php

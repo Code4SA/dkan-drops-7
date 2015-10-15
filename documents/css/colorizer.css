@@ -287,3 +287,37 @@ ul.resource-list li .heading:hover {
   display:block;
   float:right;
 }
+.datasetTheme{
+  width:150px; 
+  height:150px; 
+  background-color:#E5D794;
+  color:#1d6919;
+  font-size:14px;
+  font-weight: bold;
+  margin-left:15px;
+  margin-bottom:20px;
+}
+.datasetThemeRow{
+  line-height: 100%;
+  -webkit-column-count: 5;
+  -webkit-column-gap:   0px;
+  -moz-column-count:    5;
+  -moz-column-gap:      0px;
+  column-count:         5;
+  column-gap:           0px;
+}
+.middleContent{
+    min-width:800px;
+}
+.themeIcon{
+  font-size:50px;
+  color:#fff;
+  margin-left:50px;
+  margin-top:25px;
+}
+.themeText{
+  width:100px;
+  margin-left:25px;
+  margin-top:10px;
+  text-align: center;
+}
