@@ -43,7 +43,7 @@ endif;
           
           <p class="sectionHeading">Explore datasets by theme</p>
           <p class="label label-default">10 THEMES</p>
-          <p class="btn btn-primary datasetCountLabel">See all X datasets</p>
+          <p class="btn btn-primary datasetCountLabel">See all datasets</p>
         </div>
         <!-- TODO : insert datasets by theme -->
         <div class="inside">
