@@ -28,6 +28,15 @@
         print render($search);
       endif;
     ?>
+
+ <?php
+      $block = block_load('gtranslate', 'gtranslate');
+      if($block):
+        $translate = _block_get_renderable_array(_block_render_blocks(array($block)));
+        print render($translate);
+      endif;
+    ?>
+
   </div>
   <div class="navigation-wrapper">
     <div class="container">
@@ -111,3 +120,4 @@
   <img class="footerImage" src="http://opendataportal.cloudapp.net/profiles/dkan/themes/contrib/nuboot_radix/assets/images/chillisoft_logo_small.png">
   <img class="footerImage" src="http://opendataportal.cloudapp.net/profiles/dkan/themes/contrib/nuboot_radix/assets/images/code4sa_logo_small.png">
 </footer>
+
