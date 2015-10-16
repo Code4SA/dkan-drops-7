@@ -35,8 +35,8 @@ endif;
       <div class="container">
         <div class="inside middleContent">
           Welcome to the South African Government National Open Data Portal. 
-          <img src="http://opendataportal.cloudapp.net/profiles/dkan/themes/contrib/nuboot_radix/assets/images/twitter_icon.png" class="socialIcon" ></img>
-          <img src="http://opendataportal.cloudapp.net/profiles/dkan/themes/contrib/nuboot_radix/assets/images/facebook_icon.png" class="socialIcon" ></img>
+          <img src="/profiles/dkan/themes/contrib/nuboot_radix/assets/images/twitter_icon.png" class="socialIcon" ></img>
+          <img src="/profiles/dkan/themes/contrib/nuboot_radix/assets/images/facebook_icon.png" class="socialIcon" ></img>
           
           <p class="hrule"></p>
           
@@ -49,46 +49,46 @@ endif;
         <div class="datasetThemeRow middleContent">
           <div class="datasetTheme">
             <i class="fa fa-money themeIcon"></i>
-            <div class="themeText"><a href="#">Economy and employment</a></div>
+            <div class="themeText"><a href="/dataset/economy-and-employment">Economy and employment</a></div>
           </div>
           <div class="datasetTheme">
             <i class="fa fa-leaf themeIcon"></i>
-            <div class="themeText"><a href="#">Environmental sustainability and resilience</a></div>
+            <div class="themeText"><a href="/dataset/environmental-sustainability-and-resilience">Environmental sustainability and resilience</a></div>
           </div>
           <div class="datasetTheme">
             <i class="fa fa-globe themeIcon"></i>
-            <div class="themeText"><a href="#">South Africa in the region and the world</a></div>
+            <div class="themeText"><a href="/dataset/south-africa-region-and-world">South Africa in the region and the world</a></div>
           </div>
           <div class="datasetTheme">
             <i class="fa fa-home themeIcon"></i>
-            <div class="themeText"><a href="#">Human settlements</a></div>
+            <div class="themeText"><a href="/dataset/human-settlements">Human settlements</a></div>
           </div>
           <div class="datasetTheme">
             <i class="fa fa-book themeIcon"></i>
-            <div class="themeText"><a href="#">Education, training and innovation</a></div>
+            <div class="themeText"><a href="/dataset/education-training-and-innovation">Education, training and innovation</a></div>
           </div>
         </div>
         
         <div class="datasetThemeRow middleContent">
           <div class="datasetTheme">
             <i class="fa fa-medkit themeIcon"></i>
-            <div class="themeText"><a href="/dataset?f[0]=field_tags%3A20">Healthcare for all</a></div>
+            <div class="themeText"><a href="/dataset/healthcare-all">Healthcare for all</a></div>
           </div>
           <div class="datasetTheme">
             <i class="fa fa-bullhorn themeIcon"></i>
-            <div class="themeText"><a href="#">Community and safety</a></div>
+            <div class="themeText"><a href="/dataset/community-safety">Community and safety</a></div>
           </div>
           <div class="datasetTheme">
             <i class="fa fa-building-o themeIcon"></i>
-            <div class="themeText"><a href="#">Nation state building</a></div>
+            <div class="themeText"><a href="/dataset/nation-state-building">Nation state building</a></div>
           </div>
           <div class="datasetTheme">
             <i class="fa fa-eye themeIcon"></i>
-            <div class="themeText"><a href="#">Corruption fighting and transparency</a></div>
+            <div class="themeText"><a href="/dataset/corruption-fighting-and-transparency">Corruption fighting and transparency</a></div>
           </div>
           <div class="datasetTheme">
             <i class="fa fa-users themeIcon"></i>
-            <div class="themeText"><a href="#">Nation building and social cohesion</a></div>
+            <div class="themeText"><a href="/dataset/nation-building-and-social-cohesion">Nation building and social cohesion</a></div>
           </div>
         </div>
       </div>
