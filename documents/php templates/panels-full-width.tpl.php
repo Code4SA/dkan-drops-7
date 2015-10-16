@@ -68,7 +68,6 @@ endif;
             <div class="themeText"><a href="/dataset/education-training-and-innovation">Education, training and innovation</a></div>
           </div>
         </div>
-        
         <div class="datasetThemeRow middleContent">
           <div class="datasetTheme">
             <i class="fa fa-medkit themeIcon"></i>

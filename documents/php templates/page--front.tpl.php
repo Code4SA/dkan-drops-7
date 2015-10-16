@@ -28,15 +28,16 @@
         print render($search);
       endif;
     ?>
-
- <?php
-      $block = block_load('gtranslate', 'gtranslate');
-      if($block):
-        $translate = _block_get_renderable_array(_block_render_blocks(array($block)));
-        print render($translate);
-      endif;
-    ?>
-
+   <div class="translateRegion">
+     Translate this site:
+     <?php
+        $block = block_load('gtranslate', 'gtranslate');
+        if($block):
+          $translate = _block_get_renderable_array(_block_render_blocks(array($block)));
+          print render($translate);
+        endif;
+      ?>
+    </div>
   </div>
   <div class="navigation-wrapper">
     <div class="container">

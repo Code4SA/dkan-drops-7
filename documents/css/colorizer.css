@@ -321,3 +321,9 @@ ul.resource-list li .heading:hover {
   margin-top:10px;
   text-align: center;
 }
+.translateRegion{
+  display: block;
+  float:right;
+  margin-top:60px;
+  width:170px;
+}
