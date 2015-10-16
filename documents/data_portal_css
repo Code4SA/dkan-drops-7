@@ -40,3 +40,6 @@ http://docs.getdkan.com/dkan-documentation/dkan-developers/adding-fields-dkan
 -- User Menu --
 /var/www/html/profiles/dkan/modules/dkan/dkan_sitewide/dkan_sitewide.module
 
+-- Dataset Menu --
+/var/www/html/profiles/dkan/modules/dkan/dkan_dataset/dkan_dataset.module
+
