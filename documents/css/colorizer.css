@@ -313,6 +313,12 @@ ul.resource-list li .heading:hover {
 .datasetThemeSmallOdd{
   background-color:#D9C773;
 }
+.rowOdd{
+  background-color:#D9C773;
+}
+.rowEven{
+  background-color:#E5D794;
+}
 .dataSetThemeSmallLineBreak{
   line-height:17px;
 }

@@ -209,21 +209,32 @@
               
               // All datasets page
               if($isAllDataset){
-                $content = "<table><tr><th>#</th><th>DATASET NAME</th><th>THEME</th><th>FILETYPE</th><th>DATE ADDED</th></tr>";
+                $content = "<table style=\"border:none;\"><tr style=\"background-color:#F7BB07; color:#fff;\"><th style=\"border:none;\">#</th><th style=\"border:none;\">DATASET NAME</th><th style=\"border:none;\">THEME</th><th style=\"border:none;\">FILETYPE</th><th style=\"border:none;\">DATE ADDED</th></tr>";
                 $datasets = getAllDatasets();
-                // http://opendataportal.cloudapp.net/dataset/test-theme-2/resource/49d0be64-a4c4-433e-ace2-878580311e19
                 $pos = 1;
-                // TODO : Build table of data to inject ;)
                 foreach($datasets as $row){
                   $displayType = extractFileType($row->fileType);
                   $displayTime = makeTimeHumanTime($row->created);
-                  $content .= "<tr><td>".$pos."</td><td>".$row->datasetName."</td><td>".$row->theme."</td><td>".$displayType."</td><td>".$displayTime."</td></tr>";
+                  $displayLink = createResourceLink($row->theme, $row->uuid);
+                  $rowCss = "rowOdd";
+                  if($pos % 2 == 0){
+                    $rowCss = "rowEvent";
+                  }
+                  $content .= "<tr class=\"$rowCss\"><td style=\"border:none;\">".$pos."</td><td style=\"border:none;\"><a href=\"".$displayLink."\">".$row->datasetName."</a></td><td style=\"border:none;\">".$row->theme."</td><td style=\"border:none;\">".$displayType."</td><td style=\"border:none;\">".$displayTime."</td></tr>";
                   
                   $pos++;
                 }
                 
                 $content .= "</table>";
               }
+            }
+            
+            function createResourceLink($theme, $uuid){
+              
+              $themeUrlReady = strtolower($theme);
+              $themeUrlReady = str_replace(" ","-",$themeUrlReady);
+              
+              return "/dataset/".$themeUrlReady."/resource/".$uuid;
             }
             
             function makeTimeHumanTime($value){
@@ -273,7 +284,7 @@
                       "'Nation building and social cohesion', ".
                       "'Community and safety', ".
                       "'Healthcare for all' ".
-                      ");";
+                      ") order by created desc;";
                 
                 
                 $result = mysqli_query($con, $sql);
