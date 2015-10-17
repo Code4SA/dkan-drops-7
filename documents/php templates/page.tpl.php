@@ -209,23 +209,23 @@
               
               // All datasets page
               if($isAllDataset){
-                $content = "<table style=\"border:none;\"><tr style=\"background-color:#F7BB07; color:#fff;\"><th style=\"border:none;\">#</th><th style=\"border:none;\">DATASET NAME</th><th style=\"border:none;\">THEME</th><th style=\"border:none;\">FILETYPE</th><th style=\"border:none;\">DATE ADDED</th></tr>";
+                $content = "<table style=\"border:none;\"><tbody style=\"border-top-color:#fff\"><tr class=\"headerRowStyle\"><th style=\"border:none;\">#</th><th style=\"border:none;\">DATASET NAME</th><th style=\"border:none;\">THEME</th><th style=\"border:none;\">FILETYPE</th><th style=\"border:none;\">DATE ADDED</th></tr></tbody><tbody style=\"border-top-color:#DEAB14\">";
                 $datasets = getAllDatasets();
                 $pos = 1;
                 foreach($datasets as $row){
                   $displayType = extractFileType($row->fileType);
                   $displayTime = makeTimeHumanTime($row->created);
                   $displayLink = createResourceLink($row->theme, $row->uuid);
-                  $rowCss = "rowOdd";
-                  if($pos % 2 == 0){
-                    $rowCss = "rowEvent";
+                  $rowCss = "rowEven";
+                  if($pos % 2 == 1){
+                    $rowCss = "rowOdd";
                   }
-                  $content .= "<tr class=\"$rowCss\"><td style=\"border:none;\">".$pos."</td><td style=\"border:none;\"><a href=\"".$displayLink."\">".$row->datasetName."</a></td><td style=\"border:none;\">".$row->theme."</td><td style=\"border:none;\">".$displayType."</td><td style=\"border:none;\">".$displayTime."</td></tr>";
+                  $content .= "<tr class=\"$rowCss\"><td style=\"border:none; font-weight:bold;\">".$pos."</td><td style=\"border:none;\"><a href=\"".$displayLink."\">".$row->datasetName."</a></td><td style=\"border:none;\">".$row->theme."</td><td style=\"border:none;\">".$displayType."</td><td style=\"border:none;\">".$displayTime."</td></tr>";
                   
                   $pos++;
                 }
                 
-                $content .= "</table>";
+                $content .= "</tbody></table>";
               }
             }
             

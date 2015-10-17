@@ -394,3 +394,12 @@ ul.resource-list li .heading:hover {
 .selectedTheme{
   background-color:#FAF3D2;
 }
+.headerRowStyle{
+  background-color:#F7BB07; 
+  color:#fff; 
+  border:none;
+}
+
+.headerRowStyle:hover{
+  background-color: #F7BB07;
+}
