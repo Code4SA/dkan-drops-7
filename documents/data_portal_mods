@@ -56,6 +56,9 @@ http://docs.getdkan.com/dkan-documentation/dkan-developers/adding-fields-dkan
 -- Menu Hooks --
 /var/www/html/profiles/dkan/themes/contrib/nuboot_radix/includes/menu.inc
 
+-- SCREEN CSS --
+/var/www/html/profiles/dkan/themes/contrib/nuboot_radix/assets/stylesheets/screen.css
+
 -- MAGIC SQL --
 select * from field_data_field_resources; -- Which datasets have which resources
 select * from field_data_field_tags; -- What tags belong to which dataset
