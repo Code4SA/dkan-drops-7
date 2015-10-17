@@ -216,18 +216,15 @@
                   $displayType = extractFileType($row->fileType);
                   $displayTime = makeTimeHumanTime($row->created);
                   $displayLink = createResourceLink($row->theme, $row->uuid);
-                  $rowCss = "rowEven";
-                  if($pos % 2 == 1){
-                    $rowCss = "rowOdd";
-                  }
-                  $content .= "<tr class=\"$rowCss\"><td style=\"border:none; font-weight:bold;\">".$pos."</td><td style=\"border:none;\"><a href=\"".$displayLink."\">".$row->datasetName."</a></td><td style=\"border:none;\">".$row->theme."</td><td style=\"border:none;\">".$displayType."</td><td style=\"border:none;\">".$displayTime."</td></tr>";
+                  
+                  $content .= "<tr><td style=\"border:none; font-weight:bold;\">".$pos."</td><td style=\"border:none;\"><a href=\"".$displayLink."\">".$row->datasetName."</a></td><td style=\"border:none;\">".$row->theme."</td><td style=\"border:none;\">".$displayType."</td><td style=\"border:none;\">".$displayTime."</td></tr>";
                   
                   $pos++;
                 }
                 
                 $content .= "</tbody></table>";
                 // force a bootstrap of table functionality
-                $content .= "<script>$(function(){ $('#viewTable').dataTable({ \"bPaginate\": true,\"bLengthChange\": false,\"bFilter\": true,\"bSort\": true,\"bInfo\": true, \"bAutoWidth\": true, \"iDisplayLength\": 1}); });</script>";
+                $content .= "<script>$(function(){ $('#viewTable').dataTable({ \"bPaginate\": true,\"bLengthChange\": false,\"bFilter\": true,\"bSort\": true,\"bInfo\": true, \"bAutoWidth\": true, \"iDisplayLength\": 15}); });</script>";
               }
             }
             

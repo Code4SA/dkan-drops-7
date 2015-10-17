@@ -313,12 +313,6 @@ ul.resource-list li .heading:hover {
 .datasetThemeSmallOdd{
   background-color:#D9C773;
 }
-.rowOdd{
-  background-color:#D9C773;
-}
-.rowEven{
-  background-color:#E5D794;
-}
 .dataSetThemeSmallLineBreak{
   line-height:17px;
 }
@@ -395,11 +389,11 @@ ul.resource-list li .heading:hover {
   background-color:#FAF3D2;
 }
 .headerRowStyle{
-  background-color:#F7BB07; 
+  background-color:#E6B010; 
   color:#fff; 
   border:none;
 }
 
 .headerRowStyle:hover{
-  background-color: #F7BB07;
+  background-color: #E6B010;
 }
