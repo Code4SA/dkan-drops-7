@@ -150,11 +150,11 @@
         <section>
           <a id="main-content"></a>
           <?php print render($title_prefix); ?>
-          <?php if (!empty($title) && empty($is_panel) && !$isCustomContent): ?>
+          <?php if (!empty($title) && empty($is_panel)): ?>
             <h1 class="page-header"><?php print $title; ?></h1>
           <?php endif; ?>
           <?php print render($title_suffix); ?>
-          <?php if (!empty($tabs) && !$isCustomContent): ?>
+          <?php if (!empty($tabs)): ?>
             <?php print render($tabs); ?>
           <?php endif; ?>
           <?php if (!empty($action_links)): ?>
@@ -206,10 +206,93 @@
             $content = render($page['content']);
             if($isCustomContent){
               $content = "TODO";
-               
+              
+              // All datasets page
               if($isAllDataset){
-                $content = "Coming soon...";
+                $content = "<table><tr><th>#</th><th>DATASET NAME</th><th>THEME</th><th>FILETYPE</th><th>DATE ADDED</th></tr>";
+                $datasets = getAllDatasets();
+                // http://opendataportal.cloudapp.net/dataset/test-theme-2/resource/49d0be64-a4c4-433e-ace2-878580311e19
+                $pos = 1;
+                // TODO : Build table of data to inject ;)
+                foreach($datasets as $row){
+                  $displayType = extractFileType($row->fileType);
+                  $displayTime = makeTimeHumanTime($row->created);
+                  $content .= "<tr><td>".$pos."</td><td>".$row->datasetName."</td><td>".$row->theme."</td><td>".$displayType."</td><td>".$displayTime."</td></tr>";
+                  
+                  $pos++;
+                }
+                
+                $content .= "</table>";
               }
+            }
+            
+            function makeTimeHumanTime($value){
+              return date("Y/m/d", $value);
+            }
+            
+            function extractFileType($fileType){
+              $pos = strrpos($fileType, "/");
+              $type = substr($fileType,$pos+1);
+              return strtoupper($type);
+            }
+            
+            function getConnection(){
+              $con =  mysqli_connect("localhost", "dkan", "Dkan123__I__321!", "dkan");
+  
+              if(!$con){
+                  die("Connection failed");
+              }
+              
+              return $con;
+            }
+            
+            function getAllDatasets(){
+                $con = getConnection();
+                $datasets = array();
+                $pos = 0;
+                
+                $sql = "select n.title as 'Theme', fd.title as 'Name', filemime, filesize, fd.uuid, fd.created from ".
+                      "(select title, filemime, filesize, n.uuid, created, entity_id ".
+                      "from field_data_field_resources fdfr ".
+                      "left join file_usage fu ".
+                      "on fdfr.field_resources_target_id = fu.id ".
+                      "left join file_managed fm ".
+                      "on fu.fid = fm.fid ".
+                      "left join node n ".
+                      "on fu.id = n.nid) fd ".
+                      "left join node n ".
+                      "on fd.entity_id = n.nid ".
+                      "where n.title in ('Test Theme', 'Test Theme 2', ". 
+                      "'Economy and employment', ".
+                      "'Environmental sustainability and resilience', ".
+                      "'South Africa in the region and the world', ".
+                      "'Human settlements', ".
+                      "'Education, training and innovation', ".
+                      "'Nation state building', ".
+                      "'Corruption fighting and transparency', ".
+                      "'Nation building and social cohesion', ".
+                      "'Community and safety', ".
+                      "'Healthcare for all' ".
+                      ");";
+                
+                
+                $result = mysqli_query($con, $sql);
+                if(mysqli_num_rows($result) > 0){
+                  while($row = mysqli_fetch_assoc($result)) {
+                    $obj = new stdClass();
+                    $obj->datasetName = $row["Name"];
+                    $obj->theme = $row["Theme"];
+                    $obj->fileType = $row["filemime"];
+                    $obj->uuid = $row["uuid"];
+                    $obj->created = $row["created"];
+                    $datasets[$pos] = $obj;
+                    $pos++;
+                  }
+                }
+                
+                mysqli_close($con);   
+                
+                return $datasets;
             }
           ?>
           <div class="mainContentWrapper">
@@ -234,8 +317,8 @@
   <div class="footerSupport">
         WITH THE SUPPORT OF:
   </div>
-  <img class="footerImage" src="http://opendataportal.cloudapp.net/profiles/dkan/themes/contrib/nuboot_radix/assets/images/microsoft_logo_small.png">
-  <img class="footerImage" src="http://opendataportal.cloudapp.net/profiles/dkan/themes/contrib/nuboot_radix/assets/images/chillisoft_logo_small.png">
-  <img class="footerImage" src="http://opendataportal.cloudapp.net/profiles/dkan/themes/contrib/nuboot_radix/assets/images/code4sa_logo_small.png">
+  <a href="http://www.microsoft.com" target="_blank"><img class="footerImage" src="http://opendataportal.cloudapp.net/profiles/dkan/themes/contrib/nuboot_radix/assets/images/microsoft_logo_small.png"></a>
+  <a href="http://www.chillisoft.co.za" target="_blank"><img class="footerImage" src="http://opendataportal.cloudapp.net/profiles/dkan/themes/contrib/nuboot_radix/assets/images/chillisoft_logo_small.png"></a>
+  <a href="http://code4sa.org/" target="_blank"><img class="footerImage" src="http://opendataportal.cloudapp.net/profiles/dkan/themes/contrib/nuboot_radix/assets/images/code4sa_logo_small.png"></a>
 </footer>
 
