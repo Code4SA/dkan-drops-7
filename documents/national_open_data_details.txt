@@ -2,7 +2,9 @@ SSH
 dkan / Dk@n_0p3nDATa1Z_F0rThE!G0od
 
 MARIADB
-root / dkan_1nst@nc3_passw0rd
+dkan / Dkan123__I__321!
+
+mysqldump dkan > dkan.sql
 
 DKAN Site
 dadmin / 0p3n_DATa_1Z_GO0d_4_HaiR_GR@WTH

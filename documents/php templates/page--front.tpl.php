@@ -78,11 +78,6 @@
 
     <?php //if (!empty($breadcrumb)): print $breadcrumb; endif;?>
     <?php print $messages; ?>
-    <?php if (!empty($page['help'])): ?>
-      <?php print render($page['help']); ?>
-    <?php endif; ?>
-
-
     <div class="main-row">
 
       <section> 

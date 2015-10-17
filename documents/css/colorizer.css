@@ -1,7 +1,11 @@
+html,
 body,
 body.overlay {
   background-color: @bg;
   color: @text;
+  height:100%;
+  padding:0px;
+  margin:0px;
 }
 #header{
   background-color: #72D26D;
@@ -297,6 +301,21 @@ ul.resource-list li .heading:hover {
   margin-left:15px;
   margin-bottom:20px;
 }
+.datasetThemeSmall{
+  width:200px; 
+  height:40px;
+  line-height:40px; 
+  background-color:#E5D794;
+  color:#1d6919;
+  font-size:14px;
+  padding:5px;
+}
+.datasetThemeSmallOdd{
+  background-color:#D9C773;
+}
+.dataSetThemeSmallLineBreak{
+  line-height:17px;
+}
 .datasetThemeRow{
   line-height: 100%;
   -webkit-column-count: 5;
@@ -315,6 +334,9 @@ ul.resource-list li .heading:hover {
   margin-left:50px;
   margin-top:25px;
 }
+.themeIconStandard{
+  color:#fff; 
+}
 .themeText{
   width:100px;
   margin-left:25px;
@@ -326,4 +348,43 @@ ul.resource-list li .heading:hover {
   float:right;
   margin-top:60px;
   width:170px;
+}
+.themeMenuSpacer{
+  display:block; 
+  float:left; 
+  width:200px; 
+  height:65px;
+  margin-right:25px;
+}
+.themeMenu{
+  display:block; 
+  float:left; 
+  width:200px; 
+  height:450px; 
+  margin-top:-80px;
+  background-color: #E5D794;
+  margin-right:15px;
+  border-radius: 15px;
+}
+.mainContentWrapper{
+  display:block; 
+  float:left; 
+  width: -moz-calc(100% - 215px);
+  width: -webkit-calc(100% - 215px);
+  width: calc(100% - 215px);
+}
+.themeMenuHeader{
+  width:100%; 
+  height:35px; 
+  line-height:35px; 
+  background-color:#1d6919; 
+  color:#fff; 
+  font-size:16px; 
+  font-weight:bold; 
+  display:block;
+  border-top-left-radius:15px;
+  border-top-right-radius:15px;
+}
+.selectedTheme{
+  background-color:#FAF3D2;
 }

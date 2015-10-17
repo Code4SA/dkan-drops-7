@@ -25,6 +25,7 @@ else :
   endif;
 endif;
 ?>
+a
 <div class="panel-display panel-full-width clearfix" <?php if (!empty($css_id)) { print "id=\"$css_id\""; } ?>>
 
   <!-- Change image dynamically here -->
@@ -42,7 +43,7 @@ endif;
           
           <p class="sectionHeading">Explore datasets by theme</p>
           <p class="label label-default">10 THEMES</p>
-          <a href="/dataset" class="btn btn-primary datasetCountLabel">See all datasets</a>
+          <a href="/all-datasets" class="btn btn-primary datasetCountLabel">See all datasets</a>
         </div>
        
         <!-- datasets by theme -->
@@ -75,7 +76,7 @@ endif;
           </div>
           <div class="datasetTheme">
             <i class="fa fa-bullhorn themeIcon"></i>
-            <div class="themeText"><a href="/dataset/community-safety">Community and safety</a></div>
+            <div class="themeText"><a href="/dataset/community-and-safety">Community and safety</a></div>
           </div>
           <div class="datasetTheme">
             <i class="fa fa-building-o themeIcon"></i>

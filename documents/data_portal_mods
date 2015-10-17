@@ -6,6 +6,7 @@ Footer Color : #E5D794
 Default Link : #0A9900
 New Link     : #274E13
 
+-- COLORIZER CSS --
 /var/www/html/profiles/dkan/themes/contrib/nuboot_radix/colorizer/colorizer.css
 
 -- FIND hero.jpg --
@@ -15,9 +16,12 @@ grep -R /var/www/html -e "/user/register"
 -- WHERE THE IMAGE GETS INJECTED --
 /var/www/html/profiles/dkan/themes/contrib/nuboot_radix/panels/layouts/full_width/panels-full-width.tpl.php
 
--- FOOTER MODS --
+-- PAGE MODS --
 /var/www/html/profiles/dkan/themes/contrib/nuboot_radix/templates/page/page.tpl.php
 /var/www/html/profiles/dkan/themes/contrib/nuboot_radix/templates/page/page--front.tpl.php
+
+-- HTML TEMPLATE --
+/var/www/html/profiles/dkan/themes/contrib/nuboot_radix/templates/system/html.tpl.php
 
 -- INNER FRONT PAGE PANEL --
 /var/www/html/profiles/dkan/themes/contrib/nuboot_radix/panels/layouts/full_width/panels-full-width.tpl.php
@@ -43,3 +47,21 @@ http://docs.getdkan.com/dkan-documentation/dkan-developers/adding-fields-dkan
 -- Dataset Menu --
 /var/www/html/profiles/dkan/modules/dkan/dkan_dataset/dkan_dataset.module
 
+-- Theme Template --
+/var/www/html/profiles/dkan/themes/contrib/nuboot_radix/templates/node/node--group.tpl.php
+
+-- Resource Template --
+/var/www/html/profiles/dkan/themes/dkan/templates/node--resource.tpl.php
+
+-- Menu Hooks --
+/var/www/html/profiles/dkan/themes/contrib/nuboot_radix/includes/menu.inc
+
+-- MAGIC SQL --
+select * from field_data_field_resources; -- Which datasets have which resources
+select * from field_data_field_tags; -- What tags belong to which dataset
+select * from field_data_field_dataset_ref; -- Which resources belong to which dataset ;)
+select * from field_data_field_format; -- What format a resource is in
+select * from file_useage; -- shows what files link to what resource
+select * from file_managed; --links file id from file_usage to physical file on disk
+select * from taxonomy_term_data; -- links term_id with english description
+select * from votingapi_vote; -- gives popularity of resource
