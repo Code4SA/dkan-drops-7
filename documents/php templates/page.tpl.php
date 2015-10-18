@@ -84,7 +84,7 @@
 
 <div id="main-wrapper">
   <!-- TODO Cycle images -->
-  <div class="panel-top panel-row borderImage" style="background-image:url(http://opendataportal.cloudapp.net/profiles/dkan/themes/contrib/nuboot_radix/assets/images/hero.jpg);">
+  <div class="panel-top panel-row borderImage" style="background-image:url(/profiles/dkan/themes/contrib/nuboot_radix/assets/images/hero.jpg);">
   </div>
     <!-- Active theme menu item -->
     <?php

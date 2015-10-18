@@ -35,7 +35,12 @@ endif;
       <div class="container">
         <div class="inside middleContent">
           Welcome to the South African Government National Open Data Portal. 
-          <img src="/profiles/dkan/themes/contrib/nuboot_radix/assets/images/twitter_icon.png" class="socialIcon" ></img>
+          <!--<img src="/profiles/dkan/themes/contrib/nuboot_radix/assets/images/twitter_icon.png" class="socialIcon" ></img>-->
+          <!-- https://twitter.com/intent/tweet?original_referer=http%3A%2F%2Fopendataportal.cloudapp.net%2F&ref_src=twsrc%5Etfw&text=National%20Open%20Data%20Portal&tw_p=tweetbutton&url=http%3A%2F%2Fopendataportal.cloudapp.net%2F-->
+          <div class="socialIcon">
+            <a href="https://twitter.com/share" class="twitter-share-button" data-size="large" data-count="none">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+          </div>
           <img src="/profiles/dkan/themes/contrib/nuboot_radix/assets/images/facebook_icon.png" class="socialIcon" ></img>
           
           <p class="hrule"></p>
@@ -91,16 +96,46 @@ endif;
           </div>
         </div>
       </div>
-      <div class="panel-top panel-row" style="background-color:#E6B010">
+      
+      <div class="panel-top panel-row" style="background-color:#E6B010; min-height:450px;">
         <div class="panel-middle panel-row">
           <div class="container">
             <div class="orangeLeftBlock">
-              <i class="fa fa-clock-o" style="color:#fff; font-size:24px;"></i> <span class="orangeBlockHeader">Recently added datasets</span>
+              <i class="fa fa-clock-o" style="color:#fff; font-size:24px;"></i> <span class="orangeBlockHeader"> &nbsp; Recently added datasets</span>              
             </div>
             <div class="orangeRightBlock">
-              Twitter feed
+              <a class="twitter-timeline" href="https://twitter.com/OGPSA" data-widget-id="655842520258211841">Tweets by @OGPSA</a>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+              </a>
             </div>
           </div>
         </div>
       </div>
+      
+      <div class="panel-top panel-row" style="background-color:#72D26D; min-height:300px;">
+        <div class="panel-middle panel-row">
+          <div class="container">
+            <div class="greenLeftBlock">
+              <i class="fa fa-terminal" style="color:#fff; font-size:24px;"></i> <span class="orangeBlockHeader">&nbsp; App showcase</span>        
+               <br/>
+                <div class="imageContainer">
+                  <a href="http://wazimap.co.za/"><img src="profiles/dkan/themes/contrib/nuboot_radix/assets/images/wazimap.png" width="195" height="90"/></a>
+                  <div class="imageTitle">
+                     Wazimap
+                  </div>
+                </div>
+                <div class="imageContainer" style="margin-left:10px;">
+                  <a href="http://mpr.code4sa.org/"><img src="profiles/dkan/themes/contrib/nuboot_radix/assets/images/medicine_registry.jpg" width="195" height="90"/></a>
+                  <div class="imageTitle">
+                     Medicine price registry
+                  </div>
+                </div>      
+            </div>
+            <div class="greenRightBlock">
+               <!--Data suggestions here-->
+            </div>
+          </div>
+        </div>
+      </div>
+     
 </div>
