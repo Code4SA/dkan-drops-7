@@ -361,7 +361,7 @@ ul.resource-list li .heading:hover {
   float:left; 
   width:200px; 
   height:450px; 
-  margin-top:-80px;
+  margin-top:-90px;
   background-color: #E5D794;
   margin-right:15px;
   border-radius: 15px;
@@ -421,4 +421,24 @@ ul.resource-list li .heading:hover {
   display:block; 
   float:right;
   font-size:14px;
+}
+.orangeLeftBlock{
+  display:block; 
+  float:left; 
+  width:45%; 
+  margin-left:30px;
+}
+.orangeRightBlock{
+  display:block; 
+  float:left; 
+  width:45%; 
+  margin-left:10px; 
+  font-weight:bold;
+}
+.orangeBlockHeader{
+  font-size:16px; 
+  font-weight:bold;
+}
+.orangePanel{
+  background-color: #E6B010;
 }

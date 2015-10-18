@@ -25,7 +25,6 @@ else :
   endif;
 endif;
 ?>
-a
 <div class="panel-display panel-full-width clearfix" <?php if (!empty($css_id)) { print "id=\"$css_id\""; } ?>>
 
   <!-- Change image dynamically here -->
@@ -92,16 +91,16 @@ a
           </div>
         </div>
       </div>
-      <!--
-         HERE Or OUTSIDE
-      <div class="container" style="background-color:orange;">
-       foobar
+      <div class="panel-top panel-row" style="background-color:#E6B010">
+        <div class="panel-middle panel-row">
+          <div class="container">
+            <div class="orangeLeftBlock">
+              <i class="fa fa-clock-o" style="color:#fff; font-size:24px;"></i> <span class="orangeBlockHeader">Recently added datasets</span>
+            </div>
+            <div class="orangeRightBlock">
+              Twitter feed
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="container" style="background-color:green;">
-       foobar
-      </div>
-     -->
-    </div>
-
-  <!-- INJECT themes, popular and app showcase -->
 </div>
