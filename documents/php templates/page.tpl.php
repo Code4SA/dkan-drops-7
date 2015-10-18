@@ -380,7 +380,7 @@
                  
                  // inject SUB-THEMES: text
                  $search = "<div class=\"field-items\">";
-                 $replace = "<div class=\"field-items\"><div class=\"sub-theme-text\">SUB-THEMES:</div>";
+                 $replace = "<div class=\"field-items\"><div class=\"sub-theme-text\">SUB THEMES:</div>";
                  $content = str_replace($search, $replace, $content);
 
                  // Cut the data and resources section
