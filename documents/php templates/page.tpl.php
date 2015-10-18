@@ -377,7 +377,11 @@
             
             function generateSubThemeData($subtheme, $theme){
                $result = "";
-               $subthemeResources = getSubThemeResources($subtheme);
+               
+               $subthemeResources = array();
+               if(!empty($theme)){
+                $subthemeResources = getSubThemeResources($subtheme);
+               }
                
                $content = "<table id=\"viewTable\" style=\"border:none;\"><thead style=\"border-top-color:#fff\"><tr class=\"headerRowStyle\"><th style=\"border:none;\">#</th><th style=\"border:none;\">DATASET NAME</th><th style=\"border:none;\">FILETYPE</th><th style=\"border:none;\">DATE ADDED</th></tr></thead><tbody style=\"border-top-color:#DEAB14\">";
                 $pos = 1;
@@ -506,7 +510,7 @@
                 $datasets = array();
                 $pos = 0;
 
-                $sql = "select n.title, fm.uuid, filemime,n.created ".
+                $sql = "select n.title, n.uuid, filemime,n.created ".
                         "from taxonomy_index ti ".
                         "left join taxonomy_term_data ttd ".
                         "on ti.tid = ttd.tid ".
