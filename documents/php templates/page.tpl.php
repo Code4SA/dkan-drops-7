@@ -217,7 +217,7 @@
         }
         
         // its a search page - need to inject fakt
-        if(empty($tabs) && $showMenu){
+        if(empty($tabs) && $showMenu && !$isAllDataset){
           $tabs = "<h2 class=\"element-invisible\">Primary tabs</h2><h1 class=\"page-header\" style=\"border-bottom:0px solid #fff;\"> &nbsp; </h1>";
         }
         
@@ -353,7 +353,7 @@
             if($isCustomContent){
               // All datasets page
               if($isAllDataset){
-                $content = "<table id=\"viewTable\" style=\"border:none;\"><thead style=\"border-top-color:#fff\"><tr class=\"headerRowStyle\"><th style=\"border:none;\">#</th><th style=\"border:none;\">DATASET NAME</th><th style=\"border:none;\">THEME</th><th style=\"border:none;\">FILETYPE</th><th style=\"border:none;\">DATE ADDED</th></tr></thead><tbody style=\"border-top-color:#DEAB14\">";
+                $content = "<table id=\"viewTable\" style=\"border:none;\"><thead style=\"border-top-color:#fff\"><tr class=\"headerRowStyle\"><th style=\"border:none; min-width:15px;\">#</th><th style=\"border:none;\">DATASET NAME</th><th style=\"border:none;\">THEME</th><th style=\"border:none;\">FILETYPE</th><th style=\"border:none;\">DATE ADDED</th></tr></thead><tbody style=\"border-top-color:#DEAB14\">";
                 $datasets = getAllDatasets();
                 $pos = 1;
                 foreach($datasets as $row){
@@ -496,7 +496,11 @@
             function extractFileType($fileType){
               $pos = strrpos($fileType, "/");
               $type = substr($fileType,$pos+1);
-              return strtoupper($type);
+              $result = strtoupper($type);
+              if($result == "IP"){
+                $result = "ZIP";
+              }
+              return $result;
             }
             
             function fetchSubTheme($nid){
@@ -513,9 +517,6 @@
                 if(mysqli_num_rows($result) > 0){
                   if($row = mysqli_fetch_assoc($result)) {
                      $res = $row["name"];
-                     if($res == "IP"){
-                       $res = "ZIP";
-                     }
                   }
                 }
                 
