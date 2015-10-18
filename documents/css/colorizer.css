@@ -393,7 +393,16 @@ ul.resource-list li .heading:hover {
   color:#fff; 
   border:none;
 }
-
 .headerRowStyle:hover{
   background-color: #E6B010;
+}
+.sub-theme{
+  background-color:#E5D794; 
+  color:#1d6919;
+  display:block;
+  float:left;
+  width:auto;
+  margin-right:10px;
+  margin-top:10px;
+  padding:5px;
 }

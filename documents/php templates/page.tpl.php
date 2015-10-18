@@ -135,6 +135,19 @@
           $isCustomContent = true;
           $isAllDataset = true;
         }
+        
+        // if theme page we need to remove button content yet keep the layout;)
+        $isThemePage = false;
+        if(strrpos($breadcrumb,"<a href=\"/dataset\">Datasets</a>") && $showMenu){
+          $isCustomContent = true;
+          $isThemePage = true;
+          $header = "Theme";
+          $term = "<li class=\"active-trail\">";
+          $startThemeName = strrpos($breadcrumb, $term) + strlen($term);
+          $endThemeName = strrpos($breadcrumb, "</li>", $startThemeName);
+          $header = substr($breadcrumb, $startThemeName, ($endThemeName - $startThemeName));
+          $tabs = "<h2 class=\"element-invisible\">Primary tabs</h2><h1 class=\"page-header\">".$header."</h1>";
+        }
       ?>
   
     <?php print $messages; ?>
@@ -145,7 +158,7 @@
         </div>
       <?php endif; ?>
             
-      <?php if (!empty($breadcrumb)): print str_replace("<a href=\"/dataset\">Datasets</a>","<a href=\"/dataset\">Themes</a>",$breadcrumb); endif;?>
+      <?php if (!empty($breadcrumb)): print str_replace("<a href=\"/dataset\">Datasets</a>","<a href=\"/all-datasets\">All Datasets</a>",$breadcrumb); endif;?>
       <div class="main-row">
         <section>
           <a id="main-content"></a>
@@ -154,9 +167,11 @@
             <h1 class="page-header"><?php print $title; ?></h1>
           <?php endif; ?>
           <?php print render($title_suffix); ?>
+          <!-- Inject's the buttons -->
           <?php if (!empty($tabs)): ?>
             <?php print render($tabs); ?>
           <?php endif; ?>
+          
           <?php if (!empty($action_links)): ?>
             <ul class="action-links"><?php print render($action_links); ?></ul>
           <?php endif; ?>
@@ -205,8 +220,7 @@
           <?php
             $content = render($page['content']);
             if($isCustomContent){
-              $content = "TODO";
-              
+
               // All datasets page
               if($isAllDataset){
                 $content = "<table id=\"viewTable\" style=\"border:none;\"><thead style=\"border-top-color:#fff\"><tr class=\"headerRowStyle\"><th style=\"border:none;\">#</th><th style=\"border:none;\">DATASET NAME</th><th style=\"border:none;\">THEME</th><th style=\"border:none;\">FILETYPE</th><th style=\"border:none;\">DATE ADDED</th></tr></thead><tbody style=\"border-top-color:#DEAB14\">";
@@ -225,6 +239,13 @@
                 $content .= "</tbody></table>";
                 // force a bootstrap of table functionality
                 $content .= "<script>$(function(){ $('#viewTable').dataTable({ \"bPaginate\": true,\"bLengthChange\": false,\"bFilter\": true,\"bSort\": true,\"bInfo\": true, \"bAutoWidth\": true, \"iDisplayLength\": 15}); });</script>";
+              }
+              
+              // A Theme's page
+              if($isThemePage){
+                 $search = "<div class=\"content\">"; // -> with margin-top:-20px;
+                 $replace = "<div class=\"content\" style=\"margin-top:-20px;\">";
+                 $content = str_replace($search, $replace, $content);
               }
             }
             
