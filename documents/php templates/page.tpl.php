@@ -88,6 +88,104 @@
   </div>
     <!-- Active theme menu item -->
     <?php
+        function getConnection(){
+          $con =  mysqli_connect("localhost", "dkan", "Dkan123__I__321!", "dkan");
+        
+          if(!$con){
+              die("Connection failed");
+          }
+          
+          return $con;
+        }
+            
+        function fetchThemeName($activeTag){
+          $con = getConnection();
+          $res = "";
+          $sql = "select Title ".
+                  "from ( ".
+                  "select field_dataset_ref_target_id as 'ThemeID' ".
+                  "from taxonomy_index ti ".
+                  "left join taxonomy_term_data ttd ".
+                  "on ti.tid = ttd.tid ".
+                  "left join node n ".
+                  "on n.nid = ti.nid ".
+                  "left join field_data_field_dataset_ref fdfdr ".
+                  "on fdfdr.entity_id = n.nid ".
+                  "where LOWER(ttd.name) = LOWER('$activeTag') limit 1) as fv ".
+                  "left join node n ".
+                  "on fv.ThemeID = n.nid;";
+                  
+          $result = mysqli_query($con, $sql);
+          if(mysqli_num_rows($result) > 0){
+            if($row = mysqli_fetch_assoc($result)) {
+                $res = $row["Title"];
+            }
+          }
+          
+          mysqli_close($con);   
+          
+          return $res;
+        }
+        
+        function extractActiveTag(){
+          $data = $_SERVER['REQUEST_URI'];
+          $startPos = strrpos($data,"/");
+          $result = substr($data,$startPos+1);
+          return str_replace("-"," ",$result);
+        }
+        
+        function extractActiveTrail($data){
+          $startPos = strrpos($data,"<li class=\"active-trail\">");
+          $result = substr($data, $startPos);
+          return $result;
+        }
+        
+        // set custom content flags
+        $isCustomContent = false;
+        $isAllDataset = false;
+        if(strpos($_SERVER['REQUEST_URI'],"/all-datasets") === 0){
+          $isCustomContent = true;
+          $isAllDataset = true;
+        }
+        
+        $isThemePage = false;
+        $pageHeader = "";
+        if(strpos($_SERVER['REQUEST_URI'],"dataset/") && $showMenu){
+          $isCustomContent = true;
+          $isThemePage = true;
+          $term = "<li class=\"active-trail\">";
+          $startThemeName = strrpos($breadcrumb, $term) + strlen($term);
+          $endThemeName = strrpos($breadcrumb, "</li>", $startThemeName);
+          $pageHeader = substr($breadcrumb, $startThemeName, ($endThemeName - $startThemeName));
+          $tabs = "<h2 class=\"element-invisible\">Primary tabs</h2><h1 class=\"page-header\">".$pageHeader."</h1>";
+        }
+        
+        $isDatasetPage = false;
+        $activeTagSearch = "";
+        $themeName = "";
+        if(strpos($_SERVER['REQUEST_URI'],"tags/")){
+          $isCustomContent = true;
+          $isDatasetPage = true;
+          $activeTagSearch = extractActiveTag();
+          $themeName = fetchThemeName($activeTagSearch);
+        }
+        
+        // mod the breadcrumb trail for : Dataset aka Resource page
+        $breadcrumb = str_replace("<a href=\"/dataset\">Datasets</a>","<a href=\"/all-datasets\">All Datasets</a>",$breadcrumb);
+        if($isDatasetPage){
+          $original = $breadcrumb;          
+          
+          $breadcrumb = "<ul class=\"breadcrumb\"><li class=\"home-link\"><a href=\"/\"><i class=\"fa fa fa-home\"></i><span> Home</span></a></li><li><a href=\"/\">Home</a></li>";
+          $breadcrumb .= "<li><a href=\"/all-datasets\">All Datasets</a></li>";
+          if(!empty($themeName)){
+            $themeUrlReady = strtolower($themeName);
+            $themeUrlReady = str_replace(" ","-",$themeUrlReady);
+            $breadcrumb .= "<li><a href=\"/dataset/".$themeUrlReady."\">".$themeName."</a></li>"; // reverse look up?
+          }
+          $breadcrumb .= extractActiveTrail($original);
+        }
+    
+        // activate the right theme in the menu
         $item1Class = "";
         $item2Class = "";
         $item3Class = "";
@@ -128,51 +226,7 @@
         if(strrpos($breadcrumb,"Nation building and social cohesion") > 0){
           $item10Class = "selectedTheme";
         }
-      
-        $isCustomContent = false;
-        $isAllDataset = false;
-        // stripos(strrev($haystack), $reversed_needle) === 0;
-        if(strpos($_SERVER['REQUEST_URI'],"/all-datasets") == 0){
-          $isCustomContent = true;
-          $isAllDataset = true;
-        }
         
-        function endswith($string, $test) {
-          $strlen = strlen($string);
-          $testlen = strlen($test);
-          if ($testlen > $strlen) return false;
-          return substr_compare($string, $test, $strlen - $testlen, $testlen) === 0;
-        }
-        
-        $isThemePage = false;
-        $pageHeader = "";
-        //echo "TEST ".$_SERVER['REQUEST_URI']." ".strpos($_SERVER['REQUEST_URI'],"/dataset/");
-        if(strpos($_SERVER['REQUEST_URI'],"dataset/") && $showMenu){
-          $isCustomContent = true;
-          $isThemePage = true;
-          $term = "<li class=\"active-trail\">";
-          $startThemeName = strrpos($breadcrumb, $term) + strlen($term);
-          $endThemeName = strrpos($breadcrumb, "</li>", $startThemeName);
-          $pageHeader = substr($breadcrumb, $startThemeName, ($endThemeName - $startThemeName));
-          $tabs = "<h2 class=\"element-invisible\">Primary tabs</h2><h1 class=\"page-header\">".$pageHeader."</h1>";
-        }
-        
-        $isDatasetPage = false;
-        if(strpos($_SERVER['REQUEST_URI'],"tags/")){
-          $isCustomContent = true;
-          $isDatasetPage = true;
-        }
-        
-        echo "TEST ".$isDatasetPage;
-        
-        // mod the breadcrumb trail
-        $breadcrumb = str_replace("<a href=\"/dataset\">Datasets</a>","<a href=\"/all-datasets\">All Datasets</a>",$breadcrumb);
-        if($isDatasetPage){
-          $breadcrumb = "<ul class=\"breadcrumb\"><li class=\"home-link\"><a href=\"/\"><i class=\"fa fa fa-home\"></i><span> Home</span></a></li><li><a href=\"/\">Home</a></li>";
-          $breadcrumb .= "<li><a href=\"/all-datasets\">All Datasets</a></li>";
-          
-          // <li class="active-trail">Test Tag</li></ul>
-        }
       ?>
   
     <?php print $messages; ?>
@@ -317,8 +371,31 @@
               }
               
               if($isDatasetPage){
-                $content = "TODO";
+                $content = generateSubThemeData($activeTagSearch,$themeName);
               }
+            }
+            
+            function generateSubThemeData($subtheme, $theme){
+               $result = "";
+               $subthemeResources = getSubThemeResources($subtheme);
+               
+               $content = "<table id=\"viewTable\" style=\"border:none;\"><thead style=\"border-top-color:#fff\"><tr class=\"headerRowStyle\"><th style=\"border:none;\">#</th><th style=\"border:none;\">DATASET NAME</th><th style=\"border:none;\">FILETYPE</th><th style=\"border:none;\">DATE ADDED</th></tr></thead><tbody style=\"border-top-color:#DEAB14\">";
+                $pos = 1;
+                foreach($subthemeResources as $row){
+                  $displayType = extractFileType($row->fileType);
+                  $displayTime = makeTimeHumanTime($row->created);
+                  $displayLink = createResourceLink($theme, $row->uuid);
+                  
+                  $content .= "<tr><td style=\"border:none; font-weight:bold;\">".$pos."</td><td style=\"border:none;\"><a href=\"".$displayLink."\">".$row->name."</a></td><td style=\"border:none;\">".$displayType."</td><td style=\"border:none;\">".$displayTime."</td></tr>";
+                  
+                  $pos++;
+                }
+                
+                $content .= "</tbody></table>";
+                // force a bootstrap of table functionality
+                $content .= "<script>$(function(){ $('#viewTable').dataTable({ \"bPaginate\": true,\"bLengthChange\": false,\"bSort\": true,\"bInfo\": true, \"bAutoWidth\": true, \"iDisplayLength\": 15}); });</script>";
+               
+               return $content;
             }
             
             function generateThemeData($theme){
@@ -361,16 +438,6 @@
               $pos = strrpos($fileType, "/");
               $type = substr($fileType,$pos+1);
               return strtoupper($type);
-            }
-            
-            function getConnection(){
-              $con =  mysqli_connect("localhost", "dkan", "Dkan123__I__321!", "dkan");
-  
-              if(!$con){
-                  die("Connection failed");
-              }
-              
-              return $con;
             }
             
             function fetchSubTheme($nid){
@@ -424,6 +491,44 @@
                     $obj->uuid = $row["uuid"];
                     $obj->created = $row["created"];
                     $obj->nid = $row["nid"];
+                    $datasets[$pos] = $obj;
+                    $pos++;
+                  }
+                }
+                
+                mysqli_close($con);   
+                
+                return $datasets;
+            }
+            
+            function getSubThemeResources($subtheme){
+              $con = getConnection();
+                $datasets = array();
+                $pos = 0;
+
+                $sql = "select n.title, fm.uuid, filemime,n.created ".
+                        "from taxonomy_index ti ".
+                        "left join taxonomy_term_data ttd ".
+                        "on ti.tid = ttd.tid ".
+                        "left join node n ".
+                        "on n.nid = ti.nid ".
+                        "left join field_data_field_dataset_ref fdfdr ".
+                        "on fdfdr.entity_id = n.nid ".
+                        "left join file_usage fu ".
+                        "on fu.id = n.nid ".
+                        "left join file_managed fm ".
+                        "on fm.fid = fu.fid ".
+                        "where LOWER(ttd.name) = LOWER('$subtheme');";
+                
+                
+                $result = mysqli_query($con, $sql);
+                if(mysqli_num_rows($result) > 0){
+                  while($row = mysqli_fetch_assoc($result)) {
+                    $obj = new stdClass();
+                    $obj->name = $row["title"];
+                    $obj->fileType = $row["filemime"];
+                    $obj->uuid = $row["uuid"];
+                    $obj->created = $row["created"];
                     $datasets[$pos] = $obj;
                     $pos++;
                   }
