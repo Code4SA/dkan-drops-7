@@ -131,13 +131,19 @@
       
         $isCustomContent = false;
         $isAllDataset = false;
+        // stripos(strrev($haystack), $reversed_needle) === 0;
         if(strpos($_SERVER['REQUEST_URI'],"/all-datasets") == 0){
           $isCustomContent = true;
           $isAllDataset = true;
         }
         
-        // if theme page we need to remove button content yet keep the layout;)
-        // TODO : Change how it detects theme pages
+        function endswith($string, $test) {
+          $strlen = strlen($string);
+          $testlen = strlen($test);
+          if ($testlen > $strlen) return false;
+          return substr_compare($string, $test, $strlen - $testlen, $testlen) === 0;
+        }
+        
         $isThemePage = false;
         $pageHeader = "";
         //echo "TEST ".$_SERVER['REQUEST_URI']." ".strpos($_SERVER['REQUEST_URI'],"/dataset/");
@@ -150,6 +156,23 @@
           $pageHeader = substr($breadcrumb, $startThemeName, ($endThemeName - $startThemeName));
           $tabs = "<h2 class=\"element-invisible\">Primary tabs</h2><h1 class=\"page-header\">".$pageHeader."</h1>";
         }
+        
+        $isDatasetPage = false;
+        if(strpos($_SERVER['REQUEST_URI'],"tags/")){
+          $isCustomContent = true;
+          $isDatasetPage = true;
+        }
+        
+        echo "TEST ".$isDatasetPage;
+        
+        // mod the breadcrumb trail
+        $breadcrumb = str_replace("<a href=\"/dataset\">Datasets</a>","<a href=\"/all-datasets\">All Datasets</a>",$breadcrumb);
+        if($isDatasetPage){
+          $breadcrumb = "<ul class=\"breadcrumb\"><li class=\"home-link\"><a href=\"/\"><i class=\"fa fa fa-home\"></i><span> Home</span></a></li><li><a href=\"/\">Home</a></li>";
+          $breadcrumb .= "<li><a href=\"/all-datasets\">All Datasets</a></li>";
+          
+          // <li class="active-trail">Test Tag</li></ul>
+        }
       ?>
   
     <?php print $messages; ?>
@@ -160,7 +183,7 @@
         </div>
       <?php endif; ?>
             
-      <?php if (!empty($breadcrumb)): print str_replace("<a href=\"/dataset\">Datasets</a>","<a href=\"/all-datasets\">All Datasets</a>",$breadcrumb); endif;?>
+      <?php if (!empty($breadcrumb)): print $breadcrumb; endif;?>
       <div class="main-row">
         <section>
           <a id="main-content"></a>
@@ -291,6 +314,10 @@
                  $replace = "</article><div style=\"diplay:block; min-height:400px; width100%; margin-top:10px\">".$themeData."</div>";
                  $content = str_replace($search, $replace, $content);
                  
+              }
+              
+              if($isDatasetPage){
+                $content = "TODO";
               }
             }
             
