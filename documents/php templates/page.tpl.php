@@ -217,7 +217,7 @@
         }
         
         // its a search page - need to inject fakt
-        if(empty($tabs) && $showMenu && !$isAllDataset){
+        if(empty($tabs) && $showMenu && !$isAllDataset && !$isDatasetPage){
           $tabs = "<h2 class=\"element-invisible\">Primary tabs</h2><h1 class=\"page-header\" style=\"border-bottom:0px solid #fff;\"> &nbsp; </h1>";
         }
         
