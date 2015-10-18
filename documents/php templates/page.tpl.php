@@ -495,11 +495,11 @@
             
             function extractFileType($fileType){
               $pos = strrpos($fileType, "/");
-              $type = substr($fileType,$pos+1);
-              $result = strtoupper($type);
-              if($result == "IP"){
-                $result = "ZIP";
+              if($pos > 0){
+                $pos += 1;
               }
+              $type = substr($fileType,$pos);
+              $result = strtoupper($type);
               return $result;
             }
             
