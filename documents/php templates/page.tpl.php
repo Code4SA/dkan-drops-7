@@ -35,7 +35,7 @@
     ?>
     <div class="translateRegion">
      Translate this site:
-     <hp
+     <?php
         $block = block_load('gtranslate', 'gtranslate');
         if($block):
           $translate = _block_get_renderable_array(_block_render_blocks(array($block)));
