@@ -406,3 +406,13 @@ ul.resource-list li .heading:hover {
   margin-top:10px;
   padding:5px;
 }
+.sub-theme-text{
+  display:block;
+  float:left;
+  width:auto;
+  margin-right:10px;
+  margin-top:10px;
+  padding:5px;
+  font-size:16;
+  color:#999;
+}

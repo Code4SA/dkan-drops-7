@@ -243,9 +243,51 @@
               
               // A Theme's page
               if($isThemePage){
-                 $search = "<div class=\"content\">"; // -> with margin-top:-20px;
-                 $replace = "<div class=\"content\" style=\"margin-top:-20px;\">";
+                 // move sub-theme tags up
+                 $search = "<div class=\"content\">"; 
+                 $replace = "<div class=\"content\" style=\"margin-top:-10px;\">";
                  $content = str_replace($search, $replace, $content);
+                 
+                 // inject SUB-THEMES: text
+                 $search = "<div class=\"field-items\">";
+                 $replace = "<div class=\"field-items\"><div class=\"sub-theme-text\">SUB-THEMES:</div>";
+                 $content = str_replace($search, $replace, $content);
+
+                 // Cut the data and resources section
+                 $search = "<div id=\"data-and-resources\">";
+                 $startPos = strpos($content, $search);
+                 $search = "<section";
+                 $endPos = strpos($content, $search, $startPos);
+                 
+                 $replaceStr = substr($content, $startPos, ($endPos - $startPos));
+                 $content = str_replace($replaceStr, "", $content);
+                 
+                 // remove header
+                 $search = "<h2>Dataset Info</h2>";
+                 $replace = "";
+                 $content = str_replace($search, $replace, $content);
+                 
+                 // remove <span class="field-group-table-description">
+                 $search = "<span class=\"field-group-table-description\">";
+                 $startPos = strpos($content, $search);
+                 $search = "</span>";
+                 $endPos = strpos($content, $search, $startPos);
+                 $replaceStr = substr($content, $startPos, ($endPos - $startPos));
+                 $content = str_replace($replaceStr, "", $content);
+                 
+                 // remove <table class="field-group-format group_additional">
+                 $search = "<table class=\"field-group-format group_additional\">";
+                 $startPos = strpos($content, $search);
+                 $search = "</table>";
+                 $endPos = strpos($content, $search, $startPos);
+                 $replaceStr = substr($content, $startPos, ($endPos - $startPos));
+                 $content = str_replace($replaceStr, "", $content);
+                 
+                 // inject resources after - </article>
+                 $search = "</article>";
+                 $replace = "</article><div style=\"diplay:block; height:400px; width100%;\">CONTENT</div>";
+                 $content = str_replace($search, $replace, $content);
+                 
               }
             }
             
