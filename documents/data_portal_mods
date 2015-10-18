@@ -60,6 +60,9 @@ http://docs.getdkan.com/dkan-documentation/dkan-developers/adding-fields-dkan
 /var/www/html/profiles/dkan/themes/contrib/nuboot_radix/assets/stylesheets/screen.css
 /var/www/html/modules/system/system.theme.css
 
+-- Field Module --
+/usr/local/src/dkan/modules/field/field.module
+
 -- MAGIC SQL --
 select * from field_data_field_resources; -- Which datasets have which resources
 select * from field_data_field_tags; -- What tags belong to which dataset
@@ -69,3 +72,6 @@ select * from file_useage; -- shows what files link to what resource
 select * from file_managed; --links file id from file_usage to physical file on disk
 select * from taxonomy_term_data; -- links term_id with english description
 select * from votingapi_vote; -- gives popularity of resource
+
+-- RESOURCE DOWNLOAD --
+http://opendataportal.cloudapp.net/node/46/download

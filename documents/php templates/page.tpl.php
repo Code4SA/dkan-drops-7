@@ -35,7 +35,7 @@
     ?>
     <div class="translateRegion">
      Translate this site:
-     <?php
+     <hp
         $block = block_load('gtranslate', 'gtranslate');
         if($block):
           $translate = _block_get_renderable_array(_block_render_blocks(array($block)));
@@ -127,6 +127,25 @@
           return $res;
         }
         
+        function fetchResourceData($uuid){
+          $con = getConnection();
+          $obj = new stdClass();
+          $sql = "SELECT nid, title FROM node where uuid = '$uuid';";
+                  
+          $result = mysqli_query($con, $sql);
+          if(mysqli_num_rows($result) > 0){
+            if($row = mysqli_fetch_assoc($result)) {
+                
+                $obj->nid = $row["nid"];
+                $obj->title = $row["title"];
+            }
+          }
+          
+          mysqli_close($con);   
+          
+          return $obj;
+        }
+        
         function extractActiveTag(){
           $data = $_SERVER['REQUEST_URI'];
           $startPos = strrpos($data,"/");
@@ -140,6 +159,18 @@
           return $result;
         }
         
+        function extractResourceUUID(){
+          $data = $_SERVER['REQUEST_URI'];
+          $startPos = strrpos($data,"/");
+          $result = substr($data,$startPos+1);
+          return $result;
+        }
+        
+        function makeDownloadUrl($nid){
+          $result = "http://opendataportal.cloudapp.net/node/$nid/download";
+          return $result;
+        }
+        
         // set custom content flags
         $isCustomContent = false;
         $isAllDataset = false;
@@ -148,9 +179,10 @@
           $isAllDataset = true;
         }
         
+        // its a theme page
         $isThemePage = false;
         $pageHeader = "";
-        if(strpos($_SERVER['REQUEST_URI'],"dataset/") && !strpos($_SERVER['REQUEST_URI'],"resource/") && $showMenu){
+        if(strpos($_SERVER['REQUEST_URI'],"dataset/") && !strpos($_SERVER['REQUEST_URI'],"resource/") && !strpos($_SERVER['QUERY_STRING'],"query=") && $showMenu){
           $isCustomContent = true;
           $isThemePage = true;
           $term = "<li class=\"active-trail\">";
@@ -160,6 +192,7 @@
           $tabs = "<h2 class=\"element-invisible\">Primary tabs</h2><h1 class=\"page-header\">".$pageHeader."</h1>";
         }
         
+        // its a dataset page
         $isDatasetPage = false;
         $activeTagSearch = "";
         $themeName = "";
@@ -168,6 +201,24 @@
           $isDatasetPage = true;
           $activeTagSearch = extractActiveTag();
           $themeName = fetchThemeName($activeTagSearch);
+        }
+        
+        // its a resource page
+        $isResourcePage = false;
+        if(strpos($_SERVER['REQUEST_URI'],"resource/")){
+          $isCustomContent = true;
+          $isResourcePage = true;
+          $resourceUUID = extractResourceUUID();
+          $resourceData = fetchResourceData($resourceUUID);
+          $downloadUrl = makeDownloadUrl($resourceData->nid);
+          $resourceTitle = "$resourceData->title <div class=\"downloadButton\"><ul class=\"tabs--primary nav nav-pills\"><li>";
+          $resourceTitle .= "<a href=\"$downloadUrl\" class=\"active\">Download <i class=\"fa fa-download\"></i></a> </li></ul></div>";
+          $tabs = "<h2 class=\"element-invisible\">Primary tabs</h2><h1 class=\"page-header\" style=\"border-bottom:0px solid #fff; color:#1d6919;\">".$resourceTitle."</h1>";
+        }
+        
+        // its a search page - need to inject fakt
+        if(empty($tabs) && $showMenu){
+          $tabs = "<h2 class=\"element-invisible\">Primary tabs</h2><h1 class=\"page-header\" style=\"border-bottom:0px solid #fff;\"> &nbsp; </h1>";
         }
         
         // mod the breadcrumb trail for : Dataset aka Resource page
@@ -298,8 +349,8 @@
           <!-- Inject our own custom view data -->
           <?php
             $content = render($page['content']);
+            
             if($isCustomContent){
-
               // All datasets page
               if($isAllDataset){
                 $content = "<table id=\"viewTable\" style=\"border:none;\"><thead style=\"border-top-color:#fff\"><tr class=\"headerRowStyle\"><th style=\"border:none;\">#</th><th style=\"border:none;\">DATASET NAME</th><th style=\"border:none;\">THEME</th><th style=\"border:none;\">FILETYPE</th><th style=\"border:none;\">DATE ADDED</th></tr></thead><tbody style=\"border-top-color:#DEAB14\">";
@@ -372,6 +423,10 @@
               
               if($isDatasetPage){
                 $content = generateSubThemeData($activeTagSearch,$themeName);
+              }
+              
+              if($isResourcePage){
+                $content = str_replace("sub-theme","field-item",$content);
               }
             }
             
