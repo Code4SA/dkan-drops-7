@@ -150,7 +150,7 @@
         
         $isThemePage = false;
         $pageHeader = "";
-        if(strpos($_SERVER['REQUEST_URI'],"dataset/") && $showMenu){
+        if(strpos($_SERVER['REQUEST_URI'],"dataset/") && !strpos($_SERVER['REQUEST_URI'],"resource/") && $showMenu){
           $isCustomContent = true;
           $isThemePage = true;
           $term = "<li class=\"active-trail\">";
