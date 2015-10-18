@@ -96,12 +96,103 @@ endif;
           </div>
         </div>
       </div>
+            
+      <?php
+        function getConnection(){
+          $con =  mysqli_connect("localhost", "dkan", "Dkan123__I__321!", "dkan");
+        
+          if(!$con){
+              die("Connection failed");
+          }
+          
+          return $con;
+        }
+        
+        function getAllRecentDatasets(){
+                $con = getConnection();
+                $datasets = array();
+                $pos = 0;
+                
+                $sql = "select n.title as 'Theme',fd.title as 'Name',fd.uuid, fd.created from ".
+                      "(select title, filemime, filesize, n.uuid, created, entity_id ".
+                      "from field_data_field_resources fdfr ".
+                      "left join file_usage fu ".
+                      "on fdfr.field_resources_target_id = fu.id ".
+                      "left join file_managed fm ".
+                      "on fu.fid = fm.fid ".
+                      "left join node n ".
+                      "on fu.id = n.nid) fd ".
+                      "left join node n ".
+                      "on fd.entity_id = n.nid ".
+                      "where n.title in ('Test Theme', 'Test Theme 2', ". 
+                      "'Economy and employment', ".
+                      "'Environmental sustainability and resilience', ".
+                      "'South Africa in the region and the world', ".
+                      "'Human settlements', ".
+                      "'Education, training and innovation', ".
+                      "'Nation state building', ".
+                      "'Corruption fighting and transparency', ".
+                      "'Nation building and social cohesion', ".
+                      "'Community and safety', ".
+                      "'Healthcare for all' ".
+                      ") order by created desc limit 10;";
+                
+                
+                $result = mysqli_query($con, $sql);
+                if(mysqli_num_rows($result) > 0){
+                  while($row = mysqli_fetch_assoc($result)) {
+                    $obj = new stdClass();
+                    $obj->theme = $row["Theme"];
+                    $obj->datasetName = $row["Name"];
+                    $obj->created = $row["created"];
+                    $obj->uuid = $row["uuid"];
+                    $datasets[$pos] = $obj;
+                    $pos++;
+                  }
+                }
+                
+                mysqli_close($con);   
+                
+                return $datasets;
+            }
+            
+            function createResourceLink($theme, $uuid){
+              
+              $themeUrlReady = strtolower($theme);
+              $themeUrlReady = str_replace(" ","-",$themeUrlReady);
+              
+              return "/dataset/".$themeUrlReady."/resource/".$uuid;
+            }
+            
+            function makeTimeHumanTime($value){
+              return date("Y/m/d", $value);
+            }
+            
+            // build recent content
+            $recentContent = "<table id=\"viewTable\" style=\"border:none;\"><thead style=\"border-top-color:#fff;\"><tr class=\"headerRowStyle\"><th style=\"border:none;\">DATASET NAME</th><th style=\"border:none;\">DATE ADDED</th></tr></thead><tbody style=\"border-top-color:#DEAB14\">";
+            $datasets = getAllRecentDatasets();
+            $pos = 1;
+            foreach($datasets as $row){
+              $displayTime = makeTimeHumanTime($row->created);
+              $displayLink = createResourceLink($row->theme, $row->uuid);
+              
+              $recentContent .= "<tr><td style=\"border:none;\"><a href=\"".$displayLink."\">".$row->datasetName."</a></td><td style=\"border:none;\">".$displayTime."</td></tr>";
+              
+              $pos++;
+            }
+            
+            $recentContent .= "</tbody></table>";
+            //$recentContent .= "<script>$(function(){ $('#viewTable').dataTable(bFilter: false, bInfo: false});</script>";
+            
+      ?>
       
       <div class="panel-top panel-row" style="background-color:#E6B010; min-height:450px;">
         <div class="panel-middle panel-row">
           <div class="container">
             <div class="orangeLeftBlock">
-              <i class="fa fa-clock-o" style="color:#fff; font-size:24px;"></i> <span class="orangeBlockHeader"> &nbsp; Recently added datasets</span>              
+              <i class="fa fa-clock-o" style="color:#fff; font-size:24px;"></i> <span class="orangeBlockHeader"> &nbsp; Recently added datasets</span>
+              <br/>
+              <?php print $recentContent; ?>           
             </div>
             <div class="orangeRightBlock">
               <a class="twitter-timeline" href="https://twitter.com/OGPSA" data-widget-id="655842520258211841">Tweets by @OGPSA</a>
@@ -111,8 +202,7 @@ endif;
           </div>
         </div>
       </div>
-      
-      <div class="panel-top panel-row" style="background-color:#72D26D; min-height:300px;">
+      <div class="panel-top panel-row" style="background-color:#72D26D; min-height:200px;">
         <div class="panel-middle panel-row">
           <div class="container">
             <div class="greenLeftBlock">

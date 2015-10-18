@@ -513,6 +513,9 @@
                 if(mysqli_num_rows($result) > 0){
                   if($row = mysqli_fetch_assoc($result)) {
                      $res = $row["name"];
+                     if($res == "IP"){
+                       $res = "ZIP";
+                     }
                   }
                 }
                 
@@ -577,7 +580,7 @@
                         "on fu.id = n.nid ".
                         "left join file_managed fm ".
                         "on fm.fid = fu.fid ".
-                        "where LOWER(ttd.name) = LOWER('$subtheme');";
+                        "where LOWER(ttd.name) = LOWER('$subtheme') and filemime IS NOT NULL;";
                 
                 
                 $result = mysqli_query($con, $sql);
