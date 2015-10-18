@@ -131,7 +131,7 @@
       
         $isCustomContent = false;
         $isAllDataset = false;
-        if(strrpos($breadcrumb,"All Datasets")){
+        if(strpos($_SERVER['REQUEST_URI'],"/all-datasets") == 0){
           $isCustomContent = true;
           $isAllDataset = true;
         }
@@ -140,7 +140,8 @@
         // TODO : Change how it detects theme pages
         $isThemePage = false;
         $pageHeader = "";
-        if(strrpos($breadcrumb,"<a href=\"/dataset\">Datasets</a>") && $showMenu){
+        //echo "TEST ".$_SERVER['REQUEST_URI']." ".strpos($_SERVER['REQUEST_URI'],"/dataset/");
+        if(strpos($_SERVER['REQUEST_URI'],"dataset/") && $showMenu){
           $isCustomContent = true;
           $isThemePage = true;
           $term = "<li class=\"active-trail\">";
