@@ -137,16 +137,17 @@
         }
         
         // if theme page we need to remove button content yet keep the layout;)
+        // TODO : Change how it detects theme pages
         $isThemePage = false;
+        $pageHeader = "";
         if(strrpos($breadcrumb,"<a href=\"/dataset\">Datasets</a>") && $showMenu){
           $isCustomContent = true;
           $isThemePage = true;
-          $header = "Theme";
           $term = "<li class=\"active-trail\">";
           $startThemeName = strrpos($breadcrumb, $term) + strlen($term);
           $endThemeName = strrpos($breadcrumb, "</li>", $startThemeName);
-          $header = substr($breadcrumb, $startThemeName, ($endThemeName - $startThemeName));
-          $tabs = "<h2 class=\"element-invisible\">Primary tabs</h2><h1 class=\"page-header\">".$header."</h1>";
+          $pageHeader = substr($breadcrumb, $startThemeName, ($endThemeName - $startThemeName));
+          $tabs = "<h2 class=\"element-invisible\">Primary tabs</h2><h1 class=\"page-header\">".$pageHeader."</h1>";
         }
       ?>
   
@@ -285,10 +286,35 @@
                  
                  // inject resources after - </article>
                  $search = "</article>";
-                 $replace = "</article><div style=\"diplay:block; height:400px; width100%;\">CONTENT</div>";
+                 $themeData = generateThemeData($pageHeader);
+                 $replace = "</article><div style=\"diplay:block; min-height:400px; width100%; margin-top:10px\">".$themeData."</div>";
                  $content = str_replace($search, $replace, $content);
                  
               }
+            }
+            
+            function generateThemeData($theme){
+               $result = "";
+               $themeResources = getThemeResources($theme);
+               
+               $content = "<table id=\"viewTable\" style=\"border:none;\"><thead style=\"border-top-color:#fff\"><tr class=\"headerRowStyle\"><th style=\"border:none;\">#</th><th style=\"border:none;\">DATASET NAME</th><th style=\"border:none;\">SUB THEME</th><th style=\"border:none;\">FILETYPE</th><th style=\"border:none;\">DATE ADDED</th></tr></thead><tbody style=\"border-top-color:#DEAB14\">";
+                $pos = 1;
+                foreach($themeResources as $row){
+                  $displayType = extractFileType($row->fileType);
+                  $displayTime = makeTimeHumanTime($row->created);
+                  $displayLink = createResourceLink($theme, $row->uuid);
+                  $subTheme = fetchSubTheme($row->nid);
+                  
+                  $content .= "<tr><td style=\"border:none; font-weight:bold;\">".$pos."</td><td style=\"border:none;\"><a href=\"".$displayLink."\">".$row->datasetName."</a></td><td style=\"border:none;\">".$subTheme."</td><td style=\"border:none;\">".$displayType."</td><td style=\"border:none;\">".$displayTime."</td></tr>";
+                  
+                  $pos++;
+                }
+                
+                $content .= "</tbody></table>";
+                // force a bootstrap of table functionality
+                $content .= "<script>$(function(){ $('#viewTable').dataTable({ \"bPaginate\": true,\"bLengthChange\": false,\"bSort\": true,\"bInfo\": true, \"bAutoWidth\": true, \"iDisplayLength\": 15}); });</script>";
+               
+               return $content;
             }
             
             function createResourceLink($theme, $uuid){
@@ -317,6 +343,67 @@
               }
               
               return $con;
+            }
+            
+            function fetchSubTheme($nid){
+                $con = getConnection();
+                $res = "";
+                $sql = "select ti.tid,name ".
+                      "from taxonomy_index ti ".
+                      "left join taxonomy_term_data ttd ".
+                      "on ti.tid = ttd.tid ".
+                      "where nid = $nid ".
+                      "and ttd.vid = 2;";
+                
+                $result = mysqli_query($con, $sql);
+                if(mysqli_num_rows($result) > 0){
+                  if($row = mysqli_fetch_assoc($result)) {
+                     $res = $row["name"];
+                  }
+                }
+                
+                mysqli_close($con);   
+                
+                return $res;
+            }
+            
+            function getThemeResources($theme){
+              $con = getConnection();
+                $datasets = array();
+                $pos = 0;
+
+                $sql = "select fd.title as 'Name', filemime, filesize, fd.uuid, fd.created, fd.nid from ".
+                      "(select title, filemime, filesize, n.uuid, created, entity_id, nid ".
+                      "from field_data_field_resources fdfr ".
+                      "left join file_usage fu ".
+                      "on fdfr.field_resources_target_id = fu.id ".
+                      "left join file_managed fm ".
+                      "on fu.fid = fm.fid ".
+                      "left join node n ".
+                      "on fu.id = n.nid) fd ".
+                      "left join node n ".
+                      "on fd.entity_id = n.nid ".
+                      "where n.title = '".$theme."' ". 
+                      "order by created desc;";
+                
+                
+                $result = mysqli_query($con, $sql);
+                if(mysqli_num_rows($result) > 0){
+                  while($row = mysqli_fetch_assoc($result)) {
+                    $obj = new stdClass();
+                    $obj->datasetName = $row["Name"];
+                    $obj->fileType = $row["filemime"];
+                    $obj->uuid = $row["uuid"];
+                    $obj->created = $row["created"];
+                    $obj->nid = $row["nid"];
+                    $datasets[$pos] = $obj;
+                    $pos++;
+                  }
+                }
+                
+                mysqli_close($con);   
+                
+                return $datasets;
             }
             
             function getAllDatasets(){
