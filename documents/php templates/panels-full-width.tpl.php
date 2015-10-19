@@ -219,6 +219,12 @@ endif;
                   <div class="imageTitle">
                      Medicine price registry
                   </div>
+                </div> 
+                <div class="imageContainer" style="margin-left:10px;">
+                  <a href="http://openbylaws.org.za/"><img src="profiles/dkan/themes/contrib/nuboot_radix/assets/images/openbylaws.png" width="195" height="90"/></a>
+                  <div class="imageTitle">
+                     Open By-laws
+                  </div>
                 </div>      
             </div>
             <div class="greenRightBlock">
