@@ -24,6 +24,8 @@ body.overlay {
   margin-top:20px;
   font-weight: bold;
   text-decoration: none;
+  text-transform: uppercase;
+  border-bottom: 2px solid;
 }
 h1,h2,h3,h4 {
   color: @title;
