@@ -10,6 +10,10 @@ body.overlay {
 #header{
   background-color: #72D26D;
 }
+#header .logo img {
+  background: white;
+  padding: 5px 3px 0px;
+}
 #main-wrapper,
 .panel {
   background-color: @bg;
