@@ -311,13 +311,13 @@ ul.resource-list li .heading:hover {
   width:200px; 
   height:40px;
   line-height:40px; 
-  background-color:#E5D794;
+  background-color:#E8E0D1;
   color:#1d6919;
   font-size:14px;
   padding:5px;
 }
 .datasetThemeSmallOdd{
-  background-color:#D9C773;
+  background-color:#D9D1C3;
 }
 .dataSetThemeSmallLineBreak{
   line-height:17px;
@@ -368,7 +368,7 @@ ul.resource-list li .heading:hover {
   width:200px; 
   height:440px; 
   margin-top:-90px;
-  background-color: #E5D794;
+  background-color: #fff;
 }
 .mainContentWrapper{
   display:block; 
@@ -388,7 +388,7 @@ ul.resource-list li .heading:hover {
   display:block;
 }
 .selectedTheme{
-  background-color:#FAF3D2;
+  background-color:#fff;
 }
 .headerRowStyle{
   background-color:#E67B10; 
@@ -399,7 +399,7 @@ ul.resource-list li .heading:hover {
   background-color: #E67B10;
 }
 .sub-theme{
-  background-color:#E5D794; 
+  background-color:#E8E0D1; 
   color:#1d6919;
   display:block;
   float:left;
