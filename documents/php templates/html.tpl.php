@@ -12,7 +12,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <?php print $head; ?>
-  <title><?php print $head_title; ?></title>
+  <title>Data.gov.za</title>
   <?php print $styles; ?>
   <link href="/profiles/dkan/themes/contrib/nuboot_radix/assets/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
   <!-- HTML5 element support for IE6-8 -->

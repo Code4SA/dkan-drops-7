@@ -176,7 +176,7 @@
         <div class="panel-middle panel-row">
           <div class="container">
             <div class="greenLeftBlock">
-              <i class="fa fa-terminal" style="color:#fff; font-size:24px;"></i> <span class="orangeBlockHeader">&nbsp; Data showcases</span>        
+              <i class="fa fa-terminal" style="color:#fff; font-size:24px;"></i> <span class="orangeBlockHeader">&nbsp; App showcases</span>        
                <br/>
                 <div class="imageContainer">
                   <a href="http://wazimap.co.za/"><img src="profiles/dkan/themes/contrib/nuboot_radix/assets/images/wazimap.png" width="195" height="90"/></a>
