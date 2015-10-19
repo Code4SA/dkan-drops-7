@@ -1,37 +1,5 @@
-<?php
-/**
- * @file
- * Template for a 4 row panel layout.
- */
-$fid = theme_get_setting('hero_file');
-$file = !empty($fid) ? file_load($fid) : FALSE;
-if($file):
-  $uri = $file->uri;
-  $tint = 'tint';
-  $bg_color = 'transparent';
-  $path = file_create_url($uri);
-else :
-  $background_option = theme_get_setting('background_option');
-  if(empty($background_option)):
-    $fileNumber = rand(1,5);
-    $uri = 'profiles/dkan/themes/contrib/nuboot_radix/assets/images/hero_small_'.$fileNumber.'.png';
-    $tint = 'tint';
-    $bg_color = 'transparent';
-    $path = file_create_url($uri);
-  else :
-    $uri = '';
-    $tint = 'no-tint';
-    $bg_color = '#' . ltrim($background_option, '#');
-    $path = '';
-  endif;
-endif;
-?>
 <div class="panel-display panel-full-width clearfix" <?php if (!empty($css_id)) { print "id=\"$css_id\""; } ?>>
 
-  <!-- Change image dynamically here -->
-  <div class="panel-top panel-row" <?php print 'style="background-image:url(' . $path . ');background-color:' . $bg_color . '"'; ?>>
-  </div>
-  
     <div class="panel-middle panel-row">
       <div class="container">
         <div class="inside middleContent">
@@ -47,7 +15,6 @@ endif;
           <p class="hrule"></p>
           
           <p class="sectionHeading">Explore datasets by theme</p>
-          <p class="label label-default site-label">10 THEMES</p>
           <a href="/all-datasets" class="btn btn-primary datasetCountLabel">See all datasets</a>
         </div>
        

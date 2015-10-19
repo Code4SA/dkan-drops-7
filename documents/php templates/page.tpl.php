@@ -83,13 +83,6 @@
 </header>
 
 <div id="main-wrapper">
-  <!-- TODO Cycle images -->
-  <?php
-    $fileNumber = rand(1,5);
-    $uri = '/profiles/dkan/themes/contrib/nuboot_radix/assets/images/hero_small_'.$fileNumber.'.png';
-  ?>
-  <div class="panel-top panel-row borderImage" style="background-image:url(<?php print $uri; ?>);">
-  </div>
     <!-- Active theme menu item -->
     <?php
         function getConnection(){
@@ -246,6 +239,7 @@
           if(!empty($themeName)){
             $themeUrlReady = strtolower($themeName);
             $themeUrlReady = str_replace(" ","-",$themeUrlReady);
+            $themeUrlReady = str_replace("-for-","-", $themeUrlReady);
             $breadcrumb .= "<li><a href=\"/dataset/".$themeUrlReady."\">".$themeName."</a></li>"; // reverse look up?
           }
           $breadcrumb .= extractActiveTrail($original);
@@ -492,11 +486,11 @@
                $content = "<table id=\"viewTable\" style=\"border:none;\"><thead style=\"border-top-color:#fff;\"><tr class=\"headerRowStyle\"><th style=\"border:none; min-width:20px;\">#</th><th style=\"border:none;\">DATASET NAME</th><th style=\"border:none;\">SUB THEME</th><th style=\"border:none; min-width:70px;\">FILETYPE</th><th style=\"border:none; min-width:95px;\">DATE ADDED</th></tr></thead><tbody style=\"border-top-color:#DEAB14\">";
                 $pos = 1;
                 foreach($themeResources as $row){
-                  $displayType = extractFileType($row->fileType, $row->filename);
+                  $displayType = extractFileType($row->fileType, $row->fileName);
                   $displayTime = makeTimeHumanTime($row->created);
                   $displayLink = createResourceLink($theme, $row->uuid);
                   $subTheme = fetchSubTheme($row->nid);
-                  
+
                   $content .= "<tr><td style=\"border:none; font-weight:bold;\">".$pos."</td><td style=\"border:none;\"><a href=\"".$displayLink."\">".$row->datasetName."</a></td><td style=\"border:none;\">".$subTheme."</td><td style=\"border:none;\">".$displayType."</td><td style=\"border:none;\">".$displayTime."</td></tr>";
                   
                   $pos++;
@@ -583,7 +577,6 @@
                       "on fd.entity_id = n.nid ".
                       "where n.title = '".$theme."' ". 
                       "and filename IS NOT NULL order by created desc;";
-                
                 
                 $result = mysqli_query($con, $sql);
                 if(mysqli_num_rows($result) > 0){
@@ -715,4 +708,3 @@
   <a href="http://www.chillisoft.co.za" target="_blank"><img class="footerImage" src="http://opendataportal.cloudapp.net/profiles/dkan/themes/contrib/nuboot_radix/assets/images/chillisoft_logo_small.png"></a>
   <a href="http://code4sa.org/" target="_blank"><img class="footerImage" src="http://opendataportal.cloudapp.net/profiles/dkan/themes/contrib/nuboot_radix/assets/images/code4sa_logo_small.png"></a>
 </footer>
-
