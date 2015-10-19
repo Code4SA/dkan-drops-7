@@ -362,8 +362,6 @@ ul.resource-list li .heading:hover {
   height:450px; 
   margin-top:-90px;
   background-color: #E5D794;
-  margin-right:15px;
-  border-radius: 15px;
 }
 .mainContentWrapper{
   display:block; 
@@ -381,19 +379,17 @@ ul.resource-list li .heading:hover {
   font-size:16px; 
   font-weight:bold; 
   display:block;
-  border-top-left-radius:15px;
-  border-top-right-radius:15px;
 }
 .selectedTheme{
   background-color:#FAF3D2;
 }
 .headerRowStyle{
-  background-color:#E6B010; 
+  background-color:#E67B10; 
   color:#fff; 
   border:none;
 }
 .headerRowStyle:hover{
-  background-color: #E6B010;
+  background-color: #E67B10;
 }
 .sub-theme{
   background-color:#E5D794; 

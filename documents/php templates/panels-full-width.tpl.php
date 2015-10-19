@@ -189,7 +189,7 @@ endif;
             
       ?>
       
-      <div class="panel-full-width panel-row" style="background-color:#E6B010; min-height:450px; padding-top:30px; padding-bottom:30px;">
+      <div class="panel-full-width panel-row" style="background-color:#E67B10; min-height:450px; padding-top:30px; padding-bottom:30px;">
         <div class="panel-middle panel-row">
           <div class="container">
             <div class="orangeLeftBlock">
@@ -205,7 +205,7 @@ endif;
           </div>
         </div>
       </div>
-      <div class="panel-top panel-row" style="background-color:#72D26D; min-height:200px;">
+      <div class="panel-top panel-row" style="background-color:#5AA856; min-height:200px;">
         <div class="panel-middle panel-row">
           <div class="container">
             <div class="greenLeftBlock">
