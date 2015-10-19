@@ -381,7 +381,7 @@
                   $displayTime = makeTimeHumanTime($row->created);
                   $displayLink = createResourceLink($row->theme, $row->uuid);
                   
-                  $content .= "<tr><td style=\"border:none; font-weight:bold;\">".$pos."</td><td style=\"border:none;\"><a href=\"".$displayLink."\">".$row->datasetName."</a></td><td style=\"border:none;\">".$row->theme."</td><td style=\"border:none;\">".$displayType."</td><td style=\"border:none;\">".$displayTime."</td></tr>";
+                  $content .= "<tr><td style=\"border:none; font-weight:bold; min-width:20px;\">".$pos."</td><td style=\"border:none;\"><a href=\"".$displayLink."\">".$row->datasetName."</a></td><td style=\"border:none;\">".$row->theme."</td><td style=\"border:none;\">".$displayType."</td><td style=\"border:none;\">".$displayTime."</td></tr>";
                   
                   $pos++;
                 }
@@ -463,10 +463,11 @@
                
                $subthemeResources = array();
                if(!empty($theme)){
+                echo "TEST ".$subtheme;
                 $subthemeResources = getSubThemeResources($subtheme);
                }
                
-               $content = "<table id=\"viewTable\" style=\"border:none;\"><thead style=\"border-top-color:#fff\"><tr class=\"headerRowStyle\"><th style=\"border:none;\">#</th><th style=\"border:none;\">DATASET NAME</th><th style=\"border:none;\">FILETYPE</th><th style=\"border:none;\">DATE ADDED</th></tr></thead><tbody style=\"border-top-color:#DEAB14\">";
+               $content = "<table id=\"viewTable\" style=\"border:none;\"><thead style=\"border-top-color:#fff\"><tr class=\"headerRowStyle\"><th style=\"border:none; min-width:20px;\">#</th><th style=\"border:none;\">DATASET NAME</th><th style=\"border:none;\">FILETYPE</th><th style=\"border:none;\">DATE ADDED</th></tr></thead><tbody style=\"border-top-color:#DEAB14\">";
                 $pos = 1;
                 foreach($subthemeResources as $row){
                   $displayType = extractFileType($row->fileType);
@@ -489,7 +490,7 @@
                $result = "";
                $themeResources = getThemeResources($theme);
                
-               $content = "<table id=\"viewTable\" style=\"border:none;\"><thead style=\"border-top-color:#fff\"><tr class=\"headerRowStyle\"><th style=\"border:none;\">#</th><th style=\"border:none;\">DATASET NAME</th><th style=\"border:none;\">SUB THEME</th><th style=\"border:none;\">FILETYPE</th><th style=\"border:none;\">DATE ADDED</th></tr></thead><tbody style=\"border-top-color:#DEAB14\">";
+               $content = "<table id=\"viewTable\" style=\"border:none;\"><thead style=\"border-top-color:#fff;\"><tr class=\"headerRowStyle\"><th style=\"border:none; min-width:20px;\">#</th><th style=\"border:none;\">DATASET NAME</th><th style=\"border:none;\">SUB THEME</th><th style=\"border:none; min-width:70px;\">FILETYPE</th><th style=\"border:none; min-width:95px;\">DATE ADDED</th></tr></thead><tbody style=\"border-top-color:#DEAB14\">";
                 $pos = 1;
                 foreach($themeResources as $row){
                   $displayType = extractFileType($row->fileType);
@@ -529,6 +530,11 @@
               }
               $type = substr($fileType,$pos);
               $result = strtoupper($type);
+              if($result == "VND.MS-EXCEL"){
+                $result = "XLS";
+              }else if($result == "VND.OPENXMLFORMATS-OFFICEDOCUMENT.SPREADSHEETML.SHEET"){
+                $result = "XLSX";
+              }
               return $result;
             }
             
