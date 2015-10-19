@@ -652,7 +652,7 @@
                       "'Nation building and social cohesion', ".
                       "'Community and safety', ".
                       "'Healthcare for all' ".
-                      ") order by created desc;";
+                      ") and filemime IS NOT NULL order by created desc;";
                 
                 
                 $result = mysqli_query($con, $sql);
