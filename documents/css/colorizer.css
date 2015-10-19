@@ -8,7 +8,7 @@ body.overlay {
   margin:0px;
 }
 #header{
-  background-color: #72D26D;
+  background-color: #93CC68;
 }
 #header .logo img {
   background: white;
@@ -68,7 +68,7 @@ div.vertical-tabs ul.vertical-tabs-list li a:hover {
 }
 
 .navigation-wrapper {
-  background: @toolbarbtn;
+  background: #007237;
 }
 .navbar-default .navbar-nav li > a,
 .navbar-default .user-menu li > a { color: #FFFFFF; }
@@ -237,8 +237,8 @@ ul.resource-list li .heading:hover {
 }
 
 .footer {
-  background-color: @footer;
-  color: @sidebar;
+  background-color: #d9d1c3;
+  color: #222222;
 }
 .footer a {
   color: @sidebarborders;
