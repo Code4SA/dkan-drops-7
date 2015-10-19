@@ -288,6 +288,7 @@ ul.resource-list li .heading:hover {
   float: right;
   margin: 0 0 20px 10px;
   font-size:12px;
+  background-color:#04743a;
 }
 .borderImage{
   height:150px;
@@ -299,7 +300,7 @@ ul.resource-list li .heading:hover {
 .datasetTheme{
   width:150px; 
   height:150px; 
-  background-color:#E5D794;
+  background-color:#D9D1C3;
   color:#1d6919;
   font-size:14px;
   font-weight: bold;
@@ -365,7 +366,7 @@ ul.resource-list li .heading:hover {
   display:block; 
   float:left; 
   width:200px; 
-  height:450px; 
+  height:440px; 
   margin-top:-90px;
   background-color: #E5D794;
 }
@@ -463,9 +464,12 @@ ul.resource-list li .heading:hover {
 .imageTitle{
   width:100%; 
   display:block; 
-  background-color:#E5D794; 
+  background-color:#E8E0D1; 
   color:#1d6919; 
   text-align:center; font-weight:bold;
   font-weight: bold;
   height:20px;
+}
+.site-label{
+  background-color:#CBCBCB;
 }

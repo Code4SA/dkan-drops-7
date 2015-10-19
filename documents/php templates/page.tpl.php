@@ -359,7 +359,7 @@
                 <a href="/dataset/nation-state-building">Nation state building</a>
               </div>
               <div class="datasetThemeSmall dataSetThemeSmallLineBreak <?php print $item9Class; ?>">
-                <a href="/dataset/corruption-fighting-and-transparency">Corruption fighting and<br/> transparency</a>
+                <a href="/dataset/government-transparancy">Government Transparency</a>
               </div>
               <div class="datasetThemeSmall datasetThemeSmallOdd dataSetThemeSmallLineBreak <?php print $item10Class; ?>">
                 <a href="/dataset/nation-building-and-social-cohesion">Nation building and<br/> social cohesion</a>

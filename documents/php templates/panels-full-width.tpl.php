@@ -47,7 +47,7 @@ endif;
           <p class="hrule"></p>
           
           <p class="sectionHeading">Explore datasets by theme</p>
-          <p class="label label-default">10 THEMES</p>
+          <p class="label label-default site-label">10 THEMES</p>
           <a href="/all-datasets" class="btn btn-primary datasetCountLabel">See all datasets</a>
         </div>
        
@@ -89,7 +89,7 @@ endif;
           </div>
           <div class="datasetTheme">
             <i class="fa fa-eye themeIcon"></i>
-            <div class="themeText"><a href="/dataset/corruption-fighting-and-transparency">Corruption fighting and transparency</a></div>
+            <div class="themeText"><a href="/dataset/government-transparancy">Government Transparency</a></div>
           </div>
           <div class="datasetTheme">
             <i class="fa fa-users themeIcon"></i>
@@ -171,7 +171,7 @@ endif;
             }
             
             // build recent content
-            $recentContent = "<table id=\"viewTable\" class=\"dataTable\" style=\"border:none;\"><thead style=\"border-top-color:#fff;\"><tr class=\"headerRowStyle\"><th style=\"border:none; background-color:#E89C0F; \">DATASET NAME</th><th style=\"border:none; background-color:#E89C0F;\">DATE ADDED</th></tr></thead><tbody style=\"border-top-color:#DEAB14\">";
+            $recentContent = "<table id=\"viewTable\" class=\"dataTable\" style=\"border:none;\"><thead style=\"border-top-color:#fff;\"><tr class=\"headerRowStyle\"><th style=\"border:none; background-color:#935416; \">DATASET NAME</th><th style=\"border:none; background-color:#935416;\">DATE ADDED</th></tr></thead><tbody style=\"border-top-color:#DEAB14\">";
             $datasets = getAllRecentDatasets();
             $pos = 1;
             foreach($datasets as $row){
@@ -189,7 +189,7 @@ endif;
             
       ?>
       
-      <div class="panel-full-width panel-row" style="background-color:#E67B10; min-height:450px; padding-top:30px; padding-bottom:30px;">
+      <div class="panel-full-width panel-row" style="background-color:#EA761E; min-height:450px; padding-top:30px; padding-bottom:30px;">
         <div class="panel-middle panel-row">
           <div class="container">
             <div class="orangeLeftBlock">
@@ -205,7 +205,7 @@ endif;
           </div>
         </div>
       </div>
-      <div class="panel-top panel-row" style="background-color:#5AA856; min-height:200px;">
+      <div class="panel-top panel-row" style="background-color:#80B35B; min-height:200px;">
         <div class="panel-middle panel-row">
           <div class="container">
             <div class="greenLeftBlock">
