@@ -104,10 +104,10 @@
 <footer id="footer" class="footer" role="footer">
   <div class="container">
   <div class="footerDisclaimer">
-	  This is a placeholder for some disclaimer text.
+	  <!--This is a placeholder for some disclaimer text.-->
   </div>     
   <div class="footerTagline">
-	NATIONAL OPEN DATA PORTAL <span class="footerNotice">Copyright notices<br/>License notices</span>
+	NATIONAL OPEN DATA PORTAL <!--<span class="footerNotice">Copyright notices<br/>License notices</span>-->
   </div>
   <div class="footerSupport">
 	WITH THE SUPPORT OF:

@@ -3317,7 +3317,7 @@ p, p:last-child { margin: 0 0 1.25em 0; }
 .page-admin .alert { margin: 10px 0; }
 
 table, table.group_additional { border-collapse: collapse; margin: 1em 0; width: 100%; }
-table thead > tr > th, table.group_additional thead > tr > th { background-color: #e7e7e7; border: 1px solid #dddddd !important; padding: 4px 8px; font-weight: bold; }
+table thead > tr > th, table.group_additional thead > tr > th { background-color: #e7e7e7; border: 1px solid #ffffff !important; padding: 4px 8px; font-weight: bold; }
 table tbody th, table td, table.group_additional tbody th, table.group_additional td { border: 1px solid #dddddd; padding: 4px 8px; vertical-align: top; }
 table tr:hover, table.group_additional tr:hover { background: #FFFEEE; }
 

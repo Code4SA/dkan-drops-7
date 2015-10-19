@@ -35,12 +35,12 @@ tbody {
 }
 tr.even{
   background-color: #D9C773;;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #ffffff;
   padding: 0.1em 0.6em;
 }
 tr.odd {
   background-color: #E5D794;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #ffffff;
   padding: 0.1em 0.6em;
 }
 

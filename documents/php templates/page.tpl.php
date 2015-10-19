@@ -84,7 +84,11 @@
 
 <div id="main-wrapper">
   <!-- TODO Cycle images -->
-  <div class="panel-top panel-row borderImage" style="background-image:url(/profiles/dkan/themes/contrib/nuboot_radix/assets/images/hero.jpg);">
+  <?php
+    $fileNumber = rand(1,5);
+    $uri = '/profiles/dkan/themes/contrib/nuboot_radix/assets/images/hero_small_'.$fileNumber.'.png';
+  ?>
+  <div class="panel-top panel-row borderImage" style="background-image:url(<?php print $uri; ?>);">
   </div>
     <!-- Active theme menu item -->
     <?php
@@ -216,7 +220,14 @@
           $tabs = "<h2 class=\"element-invisible\">Primary tabs</h2><h1 class=\"page-header\" style=\"border-bottom:0px solid #fff; color:#1d6919;\">".$resourceTitle."</h1>";
         }
         
-        // its a search page - need to inject fakt
+        // its a search result page
+        $isSearchPage = false;
+        if(strpos($_SERVER['QUERY_STRING'],"query=")===0){
+          $isCustomContent = true;
+          $isSearchPage = true;
+        }
+        
+        // pad out the menu
         if(empty($tabs) && $showMenu && !$isAllDataset && !$isDatasetPage){
           $tabs = "<h2 class=\"element-invisible\">Primary tabs</h2><h1 class=\"page-header\" style=\"border-bottom:0px solid #fff;\"> &nbsp; </h1>";
         }
@@ -428,6 +439,17 @@
               if($isResourcePage){
                 $content = str_replace("sub-theme","field-item",$content);
               }
+              
+              if($isSearchPage){
+                // strip out
+                
+                $search = "<div class=\"col-md-4 radix-layouts-sidebar panel-panel\">";
+                $startPos = strrpos($content, $search);
+                $search = "<div class=\"col-md-8 radix-layouts-content panel-panel\">";
+                $endPos = strpos($content, $search, $startPos);
+                $replaceStr = strpos($content, $startPos, ($endPos - $startPos));
+                $content = str_replace($replaceStr, "", $content);
+              }
             }
             
             function generateSubThemeData($subtheme, $theme){
@@ -485,6 +507,7 @@
               
               $themeUrlReady = strtolower($theme);
               $themeUrlReady = str_replace(" ","-",$themeUrlReady);
+              $themeUrlReady = str_replace("-for-","-", $themeUrlReady);
               
               return "/dataset/".$themeUrlReady."/resource/".$uuid;
             }
@@ -655,20 +678,16 @@
               <?php print $content; ?>
           </div>
         </section>
-  
       </div>
-  
     </div> <!-- /#main -->
 </div> <!-- /#main-wrapper -->
-
-
 <footer id="footer" class="footer" role="footer">
   <div class="container">
   <div class="footerDisclaimer">
-          This is a placeholder for some disclaimer text.
+          <!--This is a placeholder for some disclaimer text.-->
   </div>
   <div class="footerTagline">
-        NATIONAL OPEN DATA PORTAL <span class="footerNotice">Copyright notices<br/>License notices</span>
+        NATIONAL OPEN DATA PORTAL <!--<span class="footerNotice">Copyright notices<br/>License notices</span>-->
   </div>
   <div class="footerSupport">
         WITH THE SUPPORT OF:

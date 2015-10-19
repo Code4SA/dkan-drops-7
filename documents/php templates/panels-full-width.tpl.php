@@ -13,7 +13,8 @@ if($file):
 else :
   $background_option = theme_get_setting('background_option');
   if(empty($background_option)):
-    $uri = 'profiles/dkan/themes/contrib/nuboot_radix/assets/images/hero.jpg';
+    $fileNumber = rand(1,5);
+    $uri = 'profiles/dkan/themes/contrib/nuboot_radix/assets/images/hero_small_'.$fileNumber.'.png';
     $tint = 'tint';
     $bg_color = 'transparent';
     $path = file_create_url($uri);
@@ -160,6 +161,7 @@ endif;
               
               $themeUrlReady = strtolower($theme);
               $themeUrlReady = str_replace(" ","-",$themeUrlReady);
+              $themeUrlReady = str_replace("-for-","-", $themeUrlReady);
               
               return "/dataset/".$themeUrlReady."/resource/".$uuid;
             }
@@ -169,15 +171,16 @@ endif;
             }
             
             // build recent content
-            $recentContent = "<table id=\"viewTable\" style=\"border:none;\"><thead style=\"border-top-color:#fff;\"><tr class=\"headerRowStyle\"><th style=\"border:none;\">DATASET NAME</th><th style=\"border:none;\">DATE ADDED</th></tr></thead><tbody style=\"border-top-color:#DEAB14\">";
+            $recentContent = "<table id=\"viewTable\" class=\"dataTable\" style=\"border:none;\"><thead style=\"border-top-color:#fff;\"><tr class=\"headerRowStyle\"><th style=\"border:none; background-color:#E89C0F; \">DATASET NAME</th><th style=\"border:none; background-color:#E89C0F;\">DATE ADDED</th></tr></thead><tbody style=\"border-top-color:#DEAB14\">";
             $datasets = getAllRecentDatasets();
             $pos = 1;
             foreach($datasets as $row){
               $displayTime = makeTimeHumanTime($row->created);
               $displayLink = createResourceLink($row->theme, $row->uuid);
-              
-              $recentContent .= "<tr><td style=\"border:none;\"><a href=\"".$displayLink."\">".$row->datasetName."</a></td><td style=\"border:none;\">".$displayTime."</td></tr>";
-              
+              $rowClass = (($pos % 2 != 0) ? "odd" : "even" );
+              $recentContent .= "<tr class=\"$rowClass\"><td style=\"border:none;\"><a href=\"".$displayLink."\">".$row->datasetName."</a></td><td style=\"border:none;\">".$displayTime."</td></tr>";
+//              $recentContent .= "<tr><td style=\"border:none;\"><a href=\"".$displayLink."\">".$row->datasetName."</a></td><td style=\"border:none;\">".$displayTime."</td></tr>";
+          
               $pos++;
             }
             
@@ -186,7 +189,7 @@ endif;
             
       ?>
       
-      <div class="panel-top panel-row" style="background-color:#E6B010; min-height:450px;">
+      <div class="panel-full-width panel-row" style="background-color:#E6B010; min-height:450px; padding-top:30px; padding-bottom:30px;">
         <div class="panel-middle panel-row">
           <div class="container">
             <div class="orangeLeftBlock">
@@ -227,11 +230,13 @@ endif;
                   </div>
                 </div>      
             </div>
-            <div class="greenRightBlock">
-               <!--Data suggestions here-->
-            </div>
+            <!--<div class="greenRightBlock">
+               Data suggestions here
+            </div>-->
           </div>
         </div>
       </div>
      
 </div>
+
+
