@@ -115,9 +115,9 @@
                   "on n.nid = ti.nid ".
                   "left join field_data_field_dataset_ref fdfdr ".
                   "on fdfdr.entity_id = n.nid ".
-                  "where LOWER(ttd.name) = LOWER('$activeTag') limit 1) as fv ".
+                  "where LOWER(ttd.name) = LOWER('$activeTag')) as fv ".
                   "left join node n ".
-                  "on fv.ThemeID = n.nid;";
+                  "on fv.ThemeID = n.nid where Title IS NOT NULL limit 1;";
                   
           $result = mysqli_query($con, $sql);
           if(mysqli_num_rows($result) > 0){
@@ -291,7 +291,7 @@
         if(strrpos($breadcrumb,"Nation state building") > 0){
           $item8Class = "selectedTheme";
         }
-        if(strrpos($breadcrumb,"Corruption fighting and transparency") > 0){
+        if(strrpos($breadcrumb,"Government transparency") > 0){
           $item9Class = "selectedTheme";
         }
         if(strrpos($breadcrumb,"Nation building and social cohesion") > 0){
@@ -359,7 +359,7 @@
                 <a href="/dataset/nation-state-building">Nation state building</a>
               </div>
               <div class="datasetThemeSmall dataSetThemeSmallLineBreak <?php print $item9Class; ?>">
-                <a href="/dataset/government-transparancy">Government Transparency</a>
+                <a href="/dataset/government-transparency">Government transparency</a>
               </div>
               <div class="datasetThemeSmall datasetThemeSmallOdd dataSetThemeSmallLineBreak <?php print $item10Class; ?>">
                 <a href="/dataset/nation-building-and-social-cohesion">Nation building and<br/> social cohesion</a>
@@ -377,7 +377,7 @@
                 $datasets = getAllDatasets();
                 $pos = 1;
                 foreach($datasets as $row){
-                  $displayType = extractFileType($row->fileType);
+                  $displayType = extractFileType($row->fileType, $row->fileName);
                   $displayTime = makeTimeHumanTime($row->created);
                   $displayLink = createResourceLink($row->theme, $row->uuid);
                   
@@ -463,14 +463,13 @@
                
                $subthemeResources = array();
                if(!empty($theme)){
-                echo "TEST ".$subtheme;
                 $subthemeResources = getSubThemeResources($subtheme);
                }
                
                $content = "<table id=\"viewTable\" style=\"border:none;\"><thead style=\"border-top-color:#fff\"><tr class=\"headerRowStyle\"><th style=\"border:none; min-width:20px;\">#</th><th style=\"border:none;\">DATASET NAME</th><th style=\"border:none;\">FILETYPE</th><th style=\"border:none;\">DATE ADDED</th></tr></thead><tbody style=\"border-top-color:#DEAB14\">";
                 $pos = 1;
                 foreach($subthemeResources as $row){
-                  $displayType = extractFileType($row->fileType);
+                  $displayType = extractFileType($row->fileType, $row->fileName);
                   $displayTime = makeTimeHumanTime($row->created);
                   $displayLink = createResourceLink($theme, $row->uuid);
                   
@@ -493,7 +492,7 @@
                $content = "<table id=\"viewTable\" style=\"border:none;\"><thead style=\"border-top-color:#fff;\"><tr class=\"headerRowStyle\"><th style=\"border:none; min-width:20px;\">#</th><th style=\"border:none;\">DATASET NAME</th><th style=\"border:none;\">SUB THEME</th><th style=\"border:none; min-width:70px;\">FILETYPE</th><th style=\"border:none; min-width:95px;\">DATE ADDED</th></tr></thead><tbody style=\"border-top-color:#DEAB14\">";
                 $pos = 1;
                 foreach($themeResources as $row){
-                  $displayType = extractFileType($row->fileType);
+                  $displayType = extractFileType($row->fileType, $row->filename);
                   $displayTime = makeTimeHumanTime($row->created);
                   $displayLink = createResourceLink($theme, $row->uuid);
                   $subTheme = fetchSubTheme($row->nid);
@@ -523,7 +522,7 @@
               return date("Y/m/d", $value);
             }
             
-            function extractFileType($fileType){
+            function extractFileType($fileType, $fileName){
               $pos = strrpos($fileType, "/");
               if($pos > 0){
                 $pos += 1;
@@ -534,6 +533,10 @@
                 $result = "XLS";
               }else if($result == "VND.OPENXMLFORMATS-OFFICEDOCUMENT.SPREADSHEETML.SHEET"){
                 $result = "XLSX";
+              }else if(empty($result)){
+                // use file name to figure out the file type
+                $pos = strrpos($fileName, ".")+1;
+                $result = strtoupper(substr($fileName, $pos));
               }
               return $result;
             }
@@ -567,8 +570,8 @@
                 $datasets = array();
                 $pos = 0;
 
-                $sql = "select fd.title as 'Name', filemime, filesize, fd.uuid, fd.created, fd.nid from ".
-                      "(select title, filemime, filesize, n.uuid, created, entity_id, nid ".
+                $sql = "select fd.title as 'Name', filemime, filesize, filename, fd.uuid, fd.created, fd.nid from ".
+                      "(select title, filemime, filesize, filename, n.uuid, created, entity_id, nid ".
                       "from field_data_field_resources fdfr ".
                       "left join file_usage fu ".
                       "on fdfr.field_resources_target_id = fu.id ".
@@ -579,7 +582,7 @@
                       "left join node n ".
                       "on fd.entity_id = n.nid ".
                       "where n.title = '".$theme."' ". 
-                      "and filemime IS NOT NULL order by created desc;";
+                      "and filename IS NOT NULL order by created desc;";
                 
                 
                 $result = mysqli_query($con, $sql);
@@ -588,6 +591,7 @@
                     $obj = new stdClass();
                     $obj->datasetName = $row["Name"];
                     $obj->fileType = $row["filemime"];
+                    $obj->fileName = $row["filename"];
                     $obj->uuid = $row["uuid"];
                     $obj->created = $row["created"];
                     $obj->nid = $row["nid"];
@@ -606,7 +610,7 @@
                 $datasets = array();
                 $pos = 0;
 
-                $sql = "select n.title, n.uuid, filemime,n.created ".
+                $sql = "select n.title, n.uuid, filemime, filename, n.created ".
                         "from taxonomy_index ti ".
                         "left join taxonomy_term_data ttd ".
                         "on ti.tid = ttd.tid ".
@@ -618,15 +622,15 @@
                         "on fu.id = n.nid ".
                         "left join file_managed fm ".
                         "on fm.fid = fu.fid ".
-                        "where LOWER(ttd.name) = LOWER('$subtheme') and filemime IS NOT NULL;";
-                
-                
+                        "where LOWER(ttd.name) = LOWER('$subtheme') and filename IS NOT NULL;";
+
                 $result = mysqli_query($con, $sql);
                 if(mysqli_num_rows($result) > 0){
                   while($row = mysqli_fetch_assoc($result)) {
                     $obj = new stdClass();
                     $obj->name = $row["title"];
                     $obj->fileType = $row["filemime"];
+                    $obj->fileName = $row["filename"];
                     $obj->uuid = $row["uuid"];
                     $obj->created = $row["created"];
                     $datasets[$pos] = $obj;
@@ -644,8 +648,8 @@
                 $datasets = array();
                 $pos = 0;
                 
-                $sql = "select n.title as 'Theme', fd.title as 'Name', filemime, filesize, fd.uuid, fd.created from ".
-                      "(select title, filemime, filesize, n.uuid, created, entity_id ".
+                $sql = "select n.title as 'Theme', fd.title as 'Name', filemime, filename, filesize, fd.uuid, fd.created from ".
+                      "(select title, filemime, filename, filesize, n.uuid, created, entity_id ".
                       "from field_data_field_resources fdfr ".
                       "left join file_usage fu ".
                       "on fdfr.field_resources_target_id = fu.id ".
@@ -662,11 +666,11 @@
                       "'Human settlements', ".
                       "'Education, training and innovation', ".
                       "'Nation state building', ".
-                      "'Corruption fighting and transparency', ".
+                      "'Government transparency', ".
                       "'Nation building and social cohesion', ".
                       "'Community and safety', ".
                       "'Healthcare for all' ".
-                      ") and filemime IS NOT NULL order by created desc;";
+                      ") and filename IS NOT NULL order by created desc;";
                 
                 
                 $result = mysqli_query($con, $sql);
@@ -676,6 +680,7 @@
                     $obj->datasetName = $row["Name"];
                     $obj->theme = $row["Theme"];
                     $obj->fileType = $row["filemime"];
+                    $obj->fileName = $row["filename"];
                     $obj->uuid = $row["uuid"];
                     $obj->created = $row["created"];
                     $datasets[$pos] = $obj;

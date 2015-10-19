@@ -89,7 +89,7 @@ endif;
           </div>
           <div class="datasetTheme">
             <i class="fa fa-eye themeIcon"></i>
-            <div class="themeText"><a href="/dataset/government-transparancy">Government Transparency</a></div>
+            <div class="themeText"><a href="/dataset/government-transparency">Government Transparency</a></div>
           </div>
           <div class="datasetTheme">
             <i class="fa fa-users themeIcon"></i>
@@ -132,7 +132,7 @@ endif;
                       "'Human settlements', ".
                       "'Education, training and innovation', ".
                       "'Nation state building', ".
-                      "'Corruption fighting and transparency', ".
+                      "'Governement transparency', ".
                       "'Nation building and social cohesion', ".
                       "'Community and safety', ".
                       "'Healthcare for all' ".
