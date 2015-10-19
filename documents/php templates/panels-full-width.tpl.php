@@ -174,7 +174,7 @@
       </div>
       <div class="panel-top panel-row" style="background-color:#80B35B; min-height:200px;">
         <div class="panel-middle panel-row">
-          <div class="container">
+          <div class="container middleContent">
             <div class="greenLeftBlock">
               <i class="fa fa-terminal" style="color:#fff; font-size:24px;"></i> <span class="orangeBlockHeader">&nbsp; App showcases</span>        
                <br/>
