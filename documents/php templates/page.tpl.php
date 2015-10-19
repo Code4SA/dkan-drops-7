@@ -536,12 +536,14 @@
                       "where nid = $nid ".
                       "and ttd.vid = 2;";
                 
-                $result = mysqli_query($con, $sql);
-                if(mysqli_num_rows($result) > 0){
-                  if($row = mysqli_fetch_assoc($result)) {
-                     $res = $row["name"];
+                try{
+                  $result = mysqli_query($con, $sql);
+                  if(mysqli_num_rows($result) > 0){
+                    if($row = mysqli_fetch_assoc($result)) {
+                      $res = $row["name"];
+                    }
                   }
-                }
+                }catch(Exception $e){}
                 
                 mysqli_close($con);   
                 
@@ -565,7 +567,7 @@
                       "left join node n ".
                       "on fd.entity_id = n.nid ".
                       "where n.title = '".$theme."' ". 
-                      "order by created desc;";
+                      "and filemime IS NOT NULL order by created desc;";
                 
                 
                 $result = mysqli_query($con, $sql);
