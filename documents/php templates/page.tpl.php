@@ -222,14 +222,18 @@
         
         // its a search result page
         $isSearchPage = false;
-        if(strpos($_SERVER['QUERY_STRING'],"query=")===0){
+        if(strpos($_SERVER['QUERY_STRING'],"query=")===0 || strpos($_SERVER['QUERY_STRING'],"page=") === 0){
           $isCustomContent = true;
           $isSearchPage = true;
         }
         
         // pad out the menu
-        if(empty($tabs) && $showMenu && !$isAllDataset && !$isDatasetPage){
+        if(empty($tabs) && $showMenu && !$isAllDataset && !$isDatasetPage && !$isSearchPage){
           $tabs = "<h2 class=\"element-invisible\">Primary tabs</h2><h1 class=\"page-header\" style=\"border-bottom:0px solid #fff;\"> &nbsp; </h1>";
+        }
+        
+        if(empty($tabs) && $isSearchPage){
+          $tabs = "<h2 class=\"element-invisible\">Primary tabs</h2><h1 class=\"page-header\" style=\"border-bottom:0px solid #fff;\"> Search Results </h1>";
         }
         
         // mod the breadcrumb trail for : Dataset aka Resource page
@@ -245,6 +249,11 @@
             $breadcrumb .= "<li><a href=\"/dataset/".$themeUrlReady."\">".$themeName."</a></li>"; // reverse look up?
           }
           $breadcrumb .= extractActiveTrail($original);
+        }
+        
+        // on search page adjust the the breadcrumb
+        if($isSearchPage){
+          $breadcrumb = str_replace("<li>Datasets</li>","<li>All Datasets</li>", $breadcrumb);
         }
     
         // activate the right theme in the menu
@@ -436,19 +445,16 @@
                 $content = generateSubThemeData($activeTagSearch,$themeName);
               }
               
-              if($isResourcePage){
+              if($isResourcePage || $isSearchPage){
                 $content = str_replace("sub-theme","field-item",$content);
               }
               
               if($isSearchPage){
                 // strip out
                 
-                $search = "<div class=\"col-md-4 radix-layouts-sidebar panel-panel\">";
-                $startPos = strrpos($content, $search);
-                $search = "<div class=\"col-md-8 radix-layouts-content panel-panel\">";
-                $endPos = strpos($content, $search, $startPos);
-                $replaceStr = strpos($content, $startPos, ($endPos - $startPos));
-                $content = str_replace($replaceStr, "", $content);
+                $search = "<h4 class=\"pane-title\">Datasets</h4>";
+                $replace = "";
+                $content = str_replace($search, $replace, $content);
               }
             }
             
