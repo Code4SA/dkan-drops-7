@@ -250,9 +250,9 @@ ul.resource-list li .heading:hover {
   margin-top:20px;
 }
 .socialIcon{
-  float:right;
+  float:left;
   display:block;
-  margin: 0 0 20px 10px;
+  margin: 20px 0 5px 0px;
 }
 .footerDisclaimer{
   font-size:12px;

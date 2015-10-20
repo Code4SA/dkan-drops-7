@@ -32,20 +32,10 @@
       <div class="container">
         <div class="inside middleContent">
           Welcome to the South African Government National Open Data Portal. 
-          <!--<img src="/profiles/dkan/themes/contrib/nuboot_radix/assets/images/twitter_icon.png" class="socialIcon" ></img>-->
-          <!-- https://twitter.com/intent/tweet?original_referer=http%3A%2F%2Fopendataportal.cloudapp.net%2F&ref_src=twsrc%5Etfw&text=National%20Open%20Data%20Portal&tw_p=tweetbutton&url=http%3A%2F%2Fopendataportal.cloudapp.net%2F-->
-          <div class="socialIcon">
-            <a href="https://twitter.com/share" class="twitter-share-button" data-size="large" data-count="none">Tweet</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-          </div>
-		  <div class="fb-share-button socialIcon" data-href="http://data.gov.za" data-layout="button"></div>	
-          <!--<img src="/profiles/dkan/themes/contrib/nuboot_radix/assets/images/facebook_icon.png" class="socialIcon" ></img>-->
-          
           <p class="hrule"></p>
-          
           <p class="sectionHeading">Explore datasets by theme</p>
           <a href="/all-datasets" class="btn btn-primary datasetCountLabel">See all datasets</a>
-        </div>
+          </div>
        
         <!-- datasets by theme -->
         <div class="datasetThemeRow middleContent">
