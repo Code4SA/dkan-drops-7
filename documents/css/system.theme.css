@@ -34,13 +34,13 @@ tbody {
   border-top: 1px solid #ccc;
 }
 tr.even{
-  background-color: #D9C773;;
-  border-bottom: 1px solid #ffffff;
+  background-color: #D9D1C3;;
+  border-bottom: 0px solid #ffffff;
   padding: 0.1em 0.6em;
 }
 tr.odd {
-  background-color: #E5D794;
-  border-bottom: 1px solid #ffffff;
+  background-color: #E8E0D1;
+  border-bottom: 0px solid #ffffff;
   padding: 0.1em 0.6em;
 }
 
