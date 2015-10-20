@@ -32,5 +32,14 @@
   <?php print $page_top; ?>
   <?php print $page; ?>
   <?php print $page_bottom; ?>
+  <script type="text/javascript">
+    var _urq = _urq || [];
+    _urq.push(['initSite', 'bd98f18a-09a5-4f6a-8017-1192e60182df']);
+    (function() {
+    var ur = document.createElement('script'); ur.type = 'text/javascript'; ur.async = true;
+    ur.src = ('https:' == document.location.protocol ? 'https://cdn.userreport.com/userreport.js' : 'http://cdn.userreport.com/userreport.js');
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ur, s);
+    })();
+  </script>
 </body>
 </html>
