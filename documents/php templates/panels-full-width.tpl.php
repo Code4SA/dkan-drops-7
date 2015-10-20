@@ -167,7 +167,7 @@
             }
             
             // build recent content
-            $recentContent = "<table id=\"viewTable\" class=\"dataTable\" style=\"border:none;\"><thead style=\"border-top-color:#fff;\"><tr class=\"headerRowStyle\"><th style=\"border:none; background-color:#935416; \">DATASET NAME</th><th style=\"border:none; background-color:#935416;\">DATE ADDED</th></tr></thead><tbody style=\"border-top-color:#DEAB14\">";
+            $recentContent = "<table id=\"viewTable\" class=\"dataTable\" style=\"border:none;\"><thead style=\"border-top-color:#fff;\"><tr class=\"headerRowStyle\"><th style=\"border:none; background-color:transparent; \">DATASET NAME</th><th style=\"border:none; background-color:transparent;\">DATE ADDED</th></tr></thead><tbody style=\"border-top-color:#DEAB14\">";
             $datasets = getAllRecentDatasets();
             $pos = 1;
             foreach($datasets as $row){
