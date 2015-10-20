@@ -405,7 +405,8 @@
             if($isCustomContent){
               // All datasets page
               if($isAllDataset){
-                $content = "<table id=\"viewTable\" style=\"border:none;\"><thead style=\"border-top-color:#fff\"><tr class=\"headerRowStyle\"><th style=\"border:none; min-width:15px;\">#</th><th style=\"border:none;\">DATASET NAME</th><th style=\"border:none;\">THEME</th><th style=\"border:none;\">FILETYPE</th><th style=\"border:none;\">DATE ADDED</th></tr></thead><tbody style=\"border-top-color:#DEAB14\">";
+                $content = "<div class=\"region region-content\">";
+                $content .= "<table id=\"viewTable\" style=\"border:none;\"><thead style=\"border-top-color:#fff\"><tr class=\"headerRowStyle\"><th style=\"border:none; min-width:15px;\">#</th><th style=\"border:none;\">DATASET NAME</th><th style=\"border:none;\">THEME</th><th style=\"border:none;\">FILETYPE</th><th style=\"border:none;\">DATE ADDED</th></tr></thead><tbody style=\"border-top-color:#DEAB14\">";
                 $datasets = getAllDatasets();
                 $pos = 1;
                 foreach($datasets as $row){
@@ -418,7 +419,7 @@
                   $pos++;
                 }
                 
-                $content .= "</tbody></table>";
+                $content .= "</tbody></table></div>";
                 // force a bootstrap of table functionality
                 $content .= "<script>$(function(){ $('#viewTable').dataTable({ \"bPaginate\": true,\"bLengthChange\": false,\"bFilter\": true,\"bSort\": true,\"bInfo\": true, \"bAutoWidth\": true, \"iDisplayLength\": 15}); });</script>";
               }
