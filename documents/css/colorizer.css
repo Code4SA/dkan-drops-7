@@ -241,6 +241,7 @@ ul.resource-list li .heading:hover {
 .footer {
   background-color: #d9d1c3;
   color: #222222;
+  padding: 20px 0;
 }
 .footer a {
   color: #274e13;
