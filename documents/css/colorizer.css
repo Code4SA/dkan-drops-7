@@ -123,8 +123,8 @@ div.vertical-tabs ul.vertical-tabs-list li a:hover {
 .tabs--primary.nav-pills li.active a:focus,
 .tabs--primary li a.active
 .tabs--primary li a:focus {
-  border:1px solid #42a53b;
-  background: #42a53b;
+  border:1px solid #007237;
+  background: #007237;
   color:#ffffff;
 }
 
