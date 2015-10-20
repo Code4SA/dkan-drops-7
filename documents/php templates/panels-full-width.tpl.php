@@ -1,5 +1,33 @@
 <div class="panel-display panel-full-width clearfix" <?php if (!empty($css_id)) { print "id=\"$css_id\""; } ?>>
 
+	<style type="text/css">
+	.fb_iframe_widget span,
+	iframe.fb_iframe_widget_lift,
+	.fb_iframe_widget iframe {
+		width:60px !important;
+		height:20px !important;
+		position:relative;
+	}
+	</style>
+	<div id="fb-root"></div>
+	<script>
+	  window.fbAsyncInit = function() {
+		FB.init({
+		  appId      : '1677930739087298',
+		  xfbml      : true,
+		  version    : 'v2.5'
+		});
+	  };
+
+	(function(d, s, id){
+		 var js, fjs = d.getElementsByTagName(s)[0];
+		 if (d.getElementById(id)) {return;}
+		 js = d.createElement(s); js.id = id;
+		 js.src = "http://connect.facebook.net/en_US/sdk.js";
+		 fjs.parentNode.insertBefore(js, fjs);
+	   }(document, 'script', 'facebook-jssdk'));
+	</script>    
+
     <div class="panel-middle panel-row">
       <div class="container">
         <div class="inside middleContent">
@@ -10,7 +38,8 @@
             <a href="https://twitter.com/share" class="twitter-share-button" data-size="large" data-count="none">Tweet</a>
             <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
           </div>
-          <img src="/profiles/dkan/themes/contrib/nuboot_radix/assets/images/facebook_icon.png" class="socialIcon" ></img>
+		  <div class="fb-share-button socialIcon" data-href="http://data.gov.za" data-layout="button"></div>	
+          <!--<img src="/profiles/dkan/themes/contrib/nuboot_radix/assets/images/facebook_icon.png" class="socialIcon" ></img>-->
           
           <p class="hrule"></p>
           
