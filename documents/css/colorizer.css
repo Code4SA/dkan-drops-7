@@ -376,6 +376,7 @@ ul.resource-list li .heading:hover {
   width: -moz-calc(100% - 215px);
   width: -webkit-calc(100% - 215px);
   width: calc(100% - 215px);
+  min-height:500px;
 }
 .themeMenuHeader{
   width:100%; 
