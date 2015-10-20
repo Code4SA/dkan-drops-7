@@ -5,6 +5,35 @@
  * Front page - no container class in main section.
  */
 ?>
+<!-- Facebook Icon -->
+	<style type="text/css">
+	.fb_iframe_widget span,
+	iframe.fb_iframe_widget_lift,
+	.fb_iframe_widget iframe {
+		width:60px !important;
+		height:20px !important;
+		position:relative;
+	}
+	</style>
+	<div id="fb-root"></div>
+	<script>
+	  window.fbAsyncInit = function() {
+		FB.init({
+		  appId      : '1677930739087298',
+		  xfbml      : true,
+		  version    : 'v2.5'
+		});
+	  };
+
+	(function(d, s, id){
+		 var js, fjs = d.getElementsByTagName(s)[0];
+		 if (d.getElementById(id)) {return;}
+		 js = d.createElement(s); js.id = id;
+		 js.src = "http://connect.facebook.net/en_US/sdk.js";
+		 fjs.parentNode.insertBefore(js, fjs);
+	   }(document, 'script', 'facebook-jssdk'));
+	</script> 
+  
 <header id="header" class="header" role="header">
   <div class="branding container">
     <?php if ($logo): ?>
@@ -37,12 +66,15 @@
           print render($translate);
         endif;
       ?>
+      <!-- Social Icons -->
+      <div>
+        <div class="fb-share-button socialIcon" data-href="http://data.gov.za" data-layout="button"></div>
+        <div class="socialIcon" style="margin-left:10px;">
+          <a href="https://twitter.com/share" class="twitter-share-button" data-count="none">Tweet</a>
+          <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </div>
+      </div>
     </div>
-    <div class="socialIcon">
-      <a href="https://twitter.com/share" class="twitter-share-button" data-count="none">Tweet</a>
-      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-    </div>
-    <div class="fb-share-button socialIcon" data-href="http://data.gov.za" data-layout="button"></div>	
   </div>
   <div class="navigation-wrapper">
     <div class="container">
