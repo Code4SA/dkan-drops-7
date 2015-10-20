@@ -310,8 +310,6 @@ ul.resource-list li .heading:hover {
 }
 .datasetThemeSmall{
   width:200px; 
-  height:40px;
-  line-height:40px; 
   background-color:#E8E0D1;
   color:#1d6919;
   font-size:14px;
